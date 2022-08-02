@@ -23,7 +23,8 @@ public class Booking {
     private LocalDateTime dayTimeBooking;
 
     private double totalPrice;
-    private int point;
+    private int pointExchange;
+    private int pointReward;
     private String bookingCode;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
