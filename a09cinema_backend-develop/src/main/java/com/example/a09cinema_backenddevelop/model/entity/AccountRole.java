@@ -19,4 +19,6 @@ public class AccountRole {
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
+
+
 }
