@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
@@ -57,6 +58,7 @@ public class Account {
     private List<AccountRole> accountRoles;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Booking> bookings;
 
 
