@@ -7,10 +7,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
     @Modifying
     @Transactional
     @Query(value = "UPDATE Account SET password = :newPassword WHERE id = :id", nativeQuery = true)
     void updatePassword(Long id, String newPassword);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Account SET fullname = :fullName, birthday = :date, gender = :gender, " +
+            "email = :email, id_card = :idCard, phone = :phone, address = :address " +
+            " WHERE id = :id", nativeQuery = true)
+    void updateInfo(Long id, String fullName, LocalDate date, String gender, String email, String idCard, String phone, String address);
 }

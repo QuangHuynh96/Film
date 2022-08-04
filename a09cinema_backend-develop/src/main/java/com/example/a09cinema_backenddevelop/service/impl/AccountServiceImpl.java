@@ -5,7 +5,8 @@ import com.example.a09cinema_backenddevelop.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-import  com.example.a09cinema_backenddevelop.service.AccountService;
+import com.example.a09cinema_backenddevelop.service.AccountService;
+
 @Service
 public class AccountServiceImpl implements AccountService {
     @Autowired
@@ -32,8 +33,9 @@ public class AccountServiceImpl implements AccountService {
         Nguyen Phuoc Dai Toan: create + update account
     */
     @Override
-    public Account save(Account account) {
-        return accountRepository.save(account);
+    public void updateInfo(Account ac) {
+        accountRepository.updateInfo(ac.getId(), ac.getFullname(), ac.getBirthday(),
+                ac.getGender(), ac.getEmail(), ac.getIdCard(), ac.getPhone(), ac.getAddress());
     }
 
 }

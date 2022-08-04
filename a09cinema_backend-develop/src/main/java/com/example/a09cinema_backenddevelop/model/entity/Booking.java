@@ -33,7 +33,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    @JsonBackReference
+    @JsonBackReference("account-booking")
     private Account account;
 
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)

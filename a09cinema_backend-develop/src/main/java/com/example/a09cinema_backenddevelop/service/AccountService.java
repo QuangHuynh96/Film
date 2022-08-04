@@ -14,5 +14,5 @@ public interface AccountService {
     /*
         Nguyen Phuoc Dai Toan: create + update account
     */
-    Account save(Account account);
+    void updateInfo(Account account);
 }

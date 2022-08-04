@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/account")
+@CrossOrigin("http://localhost:4200/")
 public class AccountController {
     @Autowired
     private AccountService accountService;
@@ -20,9 +21,21 @@ public class AccountController {
 
     /*
         Nguyen Phuoc Dai Toan
+        find account by id
+    */
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> findAccountById(@PathVariable Long id) {
+        Account account = accountService.findById(id);
+        if(account == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+    /*
+        Nguyen Phuoc Dai Toan
         user update password
     */
-    @PutMapping("/updatePassword")
+    @PostMapping("/updatePassword")
     public ResponseEntity<Account> updatePassword(@RequestParam Long id,
                                                   @RequestParam String oldPass,
                                                   @RequestParam String newPass) {
@@ -42,19 +55,20 @@ public class AccountController {
             System.out.println("password không hợp lệ");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(account, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /*
         Nguyen Phuoc Dai Toan
         user update information account as fullName, birthday,...
     */
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Account> save(@PathVariable Long id, @Valid @RequestBody Account accountRequest) {
+    @PostMapping("/update")
+    public ResponseEntity<Account> save(@RequestParam Long id, @Valid @RequestBody Account accountRequest) {
         if(accountService.findById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         accountRequest.setId(id);
-        return new ResponseEntity<>(accountService.save(accountRequest), HttpStatus.OK);
+        accountService.updateInfo(accountRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
