@@ -1,9 +1,12 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
