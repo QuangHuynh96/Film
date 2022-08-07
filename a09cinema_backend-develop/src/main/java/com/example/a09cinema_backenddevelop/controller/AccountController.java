@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/account")
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin("*")
 public class AccountController {
     @Autowired
     private AccountService accountService;
