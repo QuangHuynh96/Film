@@ -20,5 +20,5 @@ public class AccountRole {
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 
-
+    public AccountRole() {}
 }
