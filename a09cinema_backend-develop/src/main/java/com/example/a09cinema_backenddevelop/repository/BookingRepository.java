@@ -48,4 +48,5 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             "where (booking.day_time_booking between :start and :end) and booking.point_exchange > 0 " +
             "limit :offset, :numberRecord", nativeQuery = true)
     List<History> findHistoriesPointExchange(LocalDateTime start, LocalDateTime end, int offset, int numberRecord);
+
 }

@@ -12,30 +12,39 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    /*
-        Nguyen Phuoc Dai Toan: find account by id
-    */
     @Override
     public Account findById(Long id) {
         return accountRepository.findById(id).orElse(null);
     }
 
-    /*
-        Nguyen Phuoc Dai Toan: update password
-    */
     @Modifying
     @Override
     public void updatePassword(Long id, String newPassword) {
         accountRepository.updatePassword(id, newPassword);
     }
 
-    /*
-        Nguyen Phuoc Dai Toan: create + update account
-    */
     @Override
     public void updateInfo(Account ac) {
         accountRepository.updateInfo(ac.getId(), ac.getFullname(), ac.getBirthday(),
                 ac.getGender(), ac.getEmail(), ac.getIdCard(), ac.getPhone(), ac.getAddress());
     }
+    @Override
+    public Account findByUsername(String username) {
+        return accountRepository.findByUsername(username);
+    }
 
+    @Override
+    public Boolean existsByUsername(String username) {
+        return accountRepository.existsByUsername(username);
+    }
+
+    @Override
+    public Boolean existsByEmail(String email) {
+        return accountRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Account save(Account account) {
+        return accountRepository.save(account);
+    }
 }

@@ -12,17 +12,14 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/account")
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin("*")
 public class AccountController {
+
     @Autowired
     private AccountService accountService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    /*
-        Nguyen Phuoc Dai Toan
-        find account by id
-    */
     @GetMapping("/{id}")
     public ResponseEntity<Account> findAccountById(@PathVariable Long id) {
         Account account = accountService.findById(id);
@@ -31,10 +28,6 @@ public class AccountController {
         }
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
-    /*
-        Nguyen Phuoc Dai Toan
-        user update password
-    */
     @PostMapping("/updatePassword")
     public ResponseEntity<Account> updatePassword(@RequestParam Long id,
                                                   @RequestParam String oldPass,
@@ -58,17 +51,18 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /*
-        Nguyen Phuoc Dai Toan
-        user update information account as fullName, birthday,...
-    */
     @PostMapping("/update")
     public ResponseEntity<Account> save(@RequestParam Long id, @Valid @RequestBody Account accountRequest) {
-        if(accountService.findById(id) == null) {
+        if (accountService.findById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         accountRequest.setId(id);
         accountService.updateInfo(accountRequest);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    public String firstPage() {
+        return "Hello World";
     }
 }
