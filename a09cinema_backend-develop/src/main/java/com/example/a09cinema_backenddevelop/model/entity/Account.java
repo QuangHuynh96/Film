@@ -38,6 +38,14 @@ public class Account {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean deleted;
 
+    public Account(String name, String username, String email, String encode) {
+    }
+
+    public Account() {
+
+    }
+
+
     public boolean isEnable() {
         return enable;
     }
@@ -59,7 +67,6 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
-
     public String getVerificationCode() {
         return verificationCode;
     }
@@ -79,8 +86,6 @@ public class Account {
     @ManyToMany
     @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
-
 }
 
 

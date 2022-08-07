@@ -19,9 +19,20 @@ public class AccountRole {
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
-<<<<<<< HEAD
-=======
 
+    public Role getRole() {
+        return role;
+    }
 
->>>>>>> dev1
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

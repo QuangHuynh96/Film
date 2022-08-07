@@ -58,16 +58,23 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String name;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<AccountRole> accountRoles;
-<<<<<<< HEAD
-    
-=======
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public List<AccountRole> getAccountRoles() {
+        return accountRoles;
+    }
 
->>>>>>> dev1
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
+    }
 }
