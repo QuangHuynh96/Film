@@ -14,7 +14,6 @@ import javax.validation.Valid;
 @RequestMapping("/api/account")
 @CrossOrigin("*")
 public class AccountController {
-
     @Autowired
     private AccountService accountService;
     @Autowired
@@ -61,8 +60,11 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public String firstPage() {
-        return "Hello World";
+    @PostMapping("/add")
+    public ResponseEntity<Account> addAccount(@RequestBody Account account){
+        String passWord=account.getPassword();
+        account.setPassword(passwordEncoder.encode(passWord));
+        Account newAccount=accountService.saveAccount(account);
+        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 }

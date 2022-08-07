@@ -9,5 +9,6 @@ public interface AccountService {
     Account findByUsername(String username);
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);
-    Account save(Account user);
+    Account save(Account account);
+    Account saveAccount(Account account);
 }

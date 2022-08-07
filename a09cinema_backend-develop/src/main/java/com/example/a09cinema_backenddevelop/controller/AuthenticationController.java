@@ -49,7 +49,8 @@ public class AuthenticationController {
         String token = jwtProvider.createToken(authentication);
         AccountPrinciple accountPrinciple = (AccountPrinciple) authentication.getPrincipal();
         return ResponseEntity.ok(
-                new JwtResponse(token, accountPrinciple.getFullName(), accountPrinciple.getAuthorities()));
+                new JwtResponse(token, accountPrinciple.getFullName(), accountPrinciple.getAuthorities())
+        );
     }
 
 //    @PostMapping("/signup")
