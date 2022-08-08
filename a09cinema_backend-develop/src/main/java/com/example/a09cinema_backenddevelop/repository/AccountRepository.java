@@ -25,4 +25,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
             "email = :email, id_card = :idCard, phone = :phone, address = :address" +
             " WHERE id = :id", nativeQuery = true)
     void updateInfo(Long id, String fullName, LocalDate date, String gender, String email, String idCard, String phone, String address);
+
+    Account findByUsername(String username);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
 }

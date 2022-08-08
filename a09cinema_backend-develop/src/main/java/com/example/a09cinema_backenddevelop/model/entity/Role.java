@@ -59,13 +59,24 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String name;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     @JsonManagedReference("role-account")
     private List<AccountRole> accountRoles;
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public List<AccountRole> getAccountRoles() {
+        return accountRoles;
+    }
 
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
+    }
 }

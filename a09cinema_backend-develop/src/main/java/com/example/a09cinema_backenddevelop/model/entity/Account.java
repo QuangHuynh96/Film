@@ -40,6 +40,14 @@ public class Account {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean deleted;
 
+    public Account(String name, String username, String email, String encode) {
+    }
+
+    public Account() {
+
+    }
+
+
     public boolean isEnable() {
         return enable;
     }
@@ -62,7 +70,6 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     @JsonManagedReference("account-booking")
     private List<Booking> bookings;
-
 
     public String getVerificationCode() {
         return verificationCode;
