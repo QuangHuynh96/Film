@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface AccountStatisticService {
 
-    List<Account> findAllByAccount();
+    List<?> statisticalByAccount();
 }

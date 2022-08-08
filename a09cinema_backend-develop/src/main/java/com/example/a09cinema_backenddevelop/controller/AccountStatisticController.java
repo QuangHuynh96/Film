@@ -19,10 +19,10 @@ public class AccountStatisticController {
     @GetMapping("/api/statistic/account")
     public ResponseEntity accounrStatistic() {
 
-        List<Account> accounts = accountStatisticService.findAllByAccount();
+        List<?> accounts = accountStatisticService.statisticalByAccount();
         if (accounts.isEmpty()) {
             return new ResponseEntity<List<Account>>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Account>>(accounts, HttpStatus.OK);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 }

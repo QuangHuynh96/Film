@@ -10,9 +10,9 @@ import java.util.List;
 public interface AccountStatisticRepository extends JpaRepository<Account, Long> {
 
     @Query(value = "select a.fullname, a.account_code, count(b.booking_code) amount, sum(b.total_price) money, sum(a.total_point) point \n" +
-            "      from account as a \n" +
-            "      join booking as b on a.id = b.account_id\n" +
+            "      from account as a " +
+            "      join booking as b on a.id = b.account_id " +
             "      where b.day_time_booking = curdate() group by b.day_time_booking", nativeQuery = true)
-    List<Account> findAllByAccount();
+    List<?> statisticalByAccount();
 
 }

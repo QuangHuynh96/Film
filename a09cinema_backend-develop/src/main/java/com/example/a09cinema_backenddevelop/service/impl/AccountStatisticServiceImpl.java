@@ -16,7 +16,7 @@ public class AccountStatisticServiceImpl implements AccountStatisticService {
     private AccountStatisticRepository accountStatisticRepository;
 
     @Override
-    public List<Account> findAllByAccount() {
-        return accountStatisticRepository.findAllByAccount();
+    public List<?> statisticalByAccount() {
+        return accountStatisticRepository.statisticalByAccount();
     }
 }
