@@ -69,6 +69,6 @@ public class AccountController {
         }
         accountRequest.setId(id);
         accountService.updateInfo(accountRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(accountRequest, HttpStatus.OK);
     }
 }

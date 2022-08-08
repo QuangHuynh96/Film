@@ -23,7 +23,6 @@ public class AccountServiceImpl implements AccountService {
     /*
         Nguyen Phuoc Dai Toan: update password
     */
-    @Modifying
     @Override
     public void updatePassword(Long id, String newPassword) {
         accountRepository.updatePassword(id, newPassword);
