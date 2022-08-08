@@ -18,4 +18,36 @@ public class FilmImg {
     @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Film film;
 
+    public FilmImg() {
+    }
+
+    public FilmImg(long id, String urlImg, Film film) {
+        this.id = id;
+        this.urlImg = urlImg;
+        this.film = film;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
+    }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
 }

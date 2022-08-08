@@ -63,5 +63,7 @@ public class Role {
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<AccountRole> accountRoles;
-    
+
+
+
 }
