@@ -1,6 +1,7 @@
 package com.example.a09cinema_backenddevelop.controller;
 
 import com.example.a09cinema_backenddevelop.model.entity.Account;
+import com.example.a09cinema_backenddevelop.payload.response.ResponseMessage;
 import com.example.a09cinema_backenddevelop.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/auth/account")
 @CrossOrigin("*")
 public class AccountController {
     @Autowired
@@ -62,6 +63,10 @@ public class AccountController {
 
     @PostMapping("/add")
     public ResponseEntity<Account> addAccount(@RequestBody Account account){
+        if (accountService.existsByEmail(account.getEmail())){
+            System.out.println("Email đã được đăng kí");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         String passWord=account.getPassword();
         account.setPassword(passwordEncoder.encode(passWord));
         Account newAccount=accountService.saveAccount(account);
