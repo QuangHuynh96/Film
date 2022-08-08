@@ -20,19 +20,10 @@ public class FilmController {
     private FilmService filmService;
 
     @GetMapping
-    public ResponseEntity<Iterable<Film>> findFilmWithPage(Pageable pageable) {
+    public ResponseEntity<Page<Film>> findFilmWithPage(Pageable pageable) {
         Page<Film> films = filmService.findAll(pageable);
         if(films.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(films.getContent(), HttpStatus.OK);
-    }
-
-    @GetMapping("/not-pagination")
-    public ResponseEntity<List<Film>> findAll() {
-        List<Film> films = filmService.findAll();
-        if(films.isEmpty()) {
-            return new ResponseEntity<>(films, HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(films, HttpStatus.OK);
     }
@@ -57,11 +48,11 @@ public class FilmController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Iterable<Film>> searchByName(String name,Pageable pageable) {
-        Page<Film> films = filmService.searchByName(name,pageable);
+    public ResponseEntity<Page<Film>> searchByName(String name,Pageable pageable) {
+        Page<Film> films = filmService.searchByName(name, pageable);
         if(films.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(films.getContent(), HttpStatus.OK);
+        return new ResponseEntity<>(films, HttpStatus.OK);
     }
 }

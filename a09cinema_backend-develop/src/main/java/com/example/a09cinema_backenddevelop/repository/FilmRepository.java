@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FilmRepository extends JpaRepository<Film, Long> {
-    Page<Film> getAllByNameContaining(String name, Pageable pageable);
+    Page<Film> findByNameContaining(String name, Pageable pageable);
 }

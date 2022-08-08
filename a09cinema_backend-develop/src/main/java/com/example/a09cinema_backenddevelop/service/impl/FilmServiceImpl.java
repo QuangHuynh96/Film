@@ -38,6 +38,6 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public Page<Film> searchByName(String name, Pageable pageable) {
-        return filmRepository.getAllByNameContaining(name, pageable);
+        return filmRepository.findByNameContaining(name, pageable);
     }
 }
