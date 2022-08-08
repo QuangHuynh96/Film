@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
+import org.springframework.boot.jackson.JsonObjectSerializer;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,7 +17,7 @@ import java.util.Set;
 
 @Entity
 @Data
-//@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,7 +57,6 @@ public class Account {
 
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<AccountRole> accountRoles;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
@@ -81,6 +82,8 @@ public class Account {
     @ManyToMany
     @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+
 }
 
 

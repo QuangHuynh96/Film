@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface AccountRepository extends JpaRepository<Account,Long> {
     @Query(value= "select * from account left join account_role on account.id = account_role.account_id where account_role.role_id = 1",
             nativeQuery = true)
-    Page<Account> findAll(@Param("fullname") String fullname, Pageable pageable);
+    Page<Account> findAll(Pageable pageable);
 
     @Query(value= "select * from account where id = :id", nativeQuery = true)
     Account findAccountId(@Param("id") long id);

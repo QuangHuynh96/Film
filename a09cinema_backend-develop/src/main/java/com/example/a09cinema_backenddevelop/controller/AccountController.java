@@ -11,20 +11,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/api/account")
 public class AccountController {
+
     @Autowired
     private AccountService accountService;
 
     @GetMapping("/list")
-    public ResponseEntity<Page<Account>> getAllAccount(@RequestParam(defaultValue = "")
-                                                           @PageableDefault(size = 10)Pageable pageable,
-                                                       Model model){
+    public ResponseEntity<Page<Account>> getAllAccount( @PageableDefault(size = 10)Pageable pageable){
+
         Page<Account> accounts = accountService.getAllAccount(pageable);
-        model.addAttribute("accounts", accounts);
+
         if (accounts.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

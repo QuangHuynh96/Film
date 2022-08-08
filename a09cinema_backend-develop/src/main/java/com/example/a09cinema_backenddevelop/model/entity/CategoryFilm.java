@@ -1,30 +1,24 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-//import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
-
-@Entity
 @Data
+@Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
-public class Seat {
+public class CategoryFilm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne
+    @JoinColumn(name = "film_id", referencedColumnName = "id")
+    private Film film;
 
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean vip;
-    private String name;
-    private double price;
-
-    @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
-    private List<SeatDetail> seatDetail;
-
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
 
 }
