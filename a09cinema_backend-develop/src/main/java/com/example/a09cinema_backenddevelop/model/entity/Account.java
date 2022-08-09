@@ -8,8 +8,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -22,15 +27,26 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Boolean isEnabled;
+    @NotEmpty
     private String username;
     private String accountCode;
+    @NotEmpty
     private String password;
+    @NotEmpty
+    @Length(max = 100)
     private String fullname;
     private LocalDate birthday;
+    @NotEmpty
+    @Length(min = 9,max =12,message = "CMND/CCCD có từ 9 đến 12 số")
+    @Pattern(message = "Vui lòng nhập số",regexp = "^\\d{9,12}$")
     private String idCard;
     private String address;
+    @NotEmpty
+    @Pattern(message = "Số điện thoại có 10 số", regexp = "((09|03|07|08|05)+([0-9]{8})\\b)")
     private String phone;
     private String verificationCode;
+    @NotEmpty
+    @Email
     private String email;
     private String gender;
     private int totalPoint;

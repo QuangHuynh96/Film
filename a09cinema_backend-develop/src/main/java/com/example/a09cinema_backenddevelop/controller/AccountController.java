@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -62,7 +63,10 @@ public class AccountController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Account> addAccount(@RequestBody Account account){
+    public ResponseEntity<Account> addAccount(@Valid @RequestBody Account account, BindingResult bindingResult){
+       if (bindingResult.hasFieldErrors()){
+          return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+       }
         if (accountService.existsByEmail(account.getEmail())){
             System.out.println("Email đã được đăng kí");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
