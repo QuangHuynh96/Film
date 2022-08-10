@@ -21,8 +21,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
@@ -36,14 +36,10 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+    // https://mvnrepository.com/artifact/com.voodoodyne.jackson.jsog/jackson-jsog
+    implementation group: 'com.voodoodyne.jackson.jsog', name: 'jackson-jsog', version: '1.1.2'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-
-//    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
-//    implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.7.2'
-
-    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
-    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 //    testImplementation 'org.springframework.security:spring-security-test'
 }
 

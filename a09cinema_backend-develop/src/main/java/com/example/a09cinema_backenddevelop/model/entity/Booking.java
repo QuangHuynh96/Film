@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,11 +13,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
-//@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,11 +34,8 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    @JsonBackReference("account-booking")
+    @JsonBackReference("acc_bookings")
     private Account account;
-
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
 
 //    @OneToOne(mappedBy = "booking")
 //    private History history;

@@ -1,11 +1,11 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
-//import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Entity
 @Data
-//@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,14 +40,6 @@ public class Account {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean deleted;
 
-    public Account(String name, String username, String email, String encode) {
-    }
-
-    public Account() {
-
-    }
-
-
     public boolean isEnable() {
         return enable;
     }
@@ -64,12 +56,13 @@ public class Account {
 
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    @JsonManagedReference("account-role")
+    @JsonManagedReference("acc_roles")
     private List<AccountRole> accountRoles;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    @JsonManagedReference("account-booking")
+    @JsonManagedReference("acc_bookings")
     private List<Booking> bookings;
+
 
     public String getVerificationCode() {
         return verificationCode;
@@ -88,9 +81,12 @@ public class Account {
     }
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     @JsonIgnore
     private Set<Role> roles;
+
+
 }
 
 
