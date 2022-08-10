@@ -51,15 +51,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable()
-                // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-                // all other requests need to be authenticated
-                .anyRequest().authenticated().and()
-
-                // make sure we use stateless session; session won't be used to store user's state.
-                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        // Add a filter to validate the tokens with every request
-        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                .authorizeRequests().antMatchers("/api/**").permitAll();
+//        http.cors().and().csrf().disable()
+//                // dont authenticate this particular request
+//                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+//                // all other requests need to be authenticated
+//                .anyRequest().authenticated().and()
+//
+//                // make sure we use stateless session; session won't be used to store user's state.
+//                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and().sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        // Add a filter to validate the tokens with every request
+//        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
