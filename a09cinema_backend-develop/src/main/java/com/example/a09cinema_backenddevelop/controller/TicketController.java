@@ -2,6 +2,8 @@ package com.example.a09cinema_backenddevelop.controller;
 
 import com.example.a09cinema_backenddevelop.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,8 +21,8 @@ public class TicketController {
     TicketService ticketService;
 
     @GetMapping("/getbookedticket")
-    public ResponseEntity<List> getBookedTicket() {
-        List list = ticketService.getBookedTicket();
+    public ResponseEntity<Page> getBookedTicket(Pageable pageable) {
+        Page list = ticketService.getBookedTicket(pageable);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
