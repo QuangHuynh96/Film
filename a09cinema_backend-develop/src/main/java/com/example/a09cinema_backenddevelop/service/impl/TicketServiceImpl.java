@@ -1,5 +1,6 @@
 package com.example.a09cinema_backenddevelop.service.impl;
 
+import com.example.a09cinema_backenddevelop.model.BookedTicket;
 import com.example.a09cinema_backenddevelop.repository.TicketRepository;
 import com.example.a09cinema_backenddevelop.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;

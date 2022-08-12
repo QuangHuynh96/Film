@@ -1,5 +1,6 @@
 package com.example.a09cinema_backenddevelop.controller;
 
+import com.example.a09cinema_backenddevelop.model.BookedTicket;
 import com.example.a09cinema_backenddevelop.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ public class TicketController {
 
     @GetMapping("/getbookedticket")
     public ResponseEntity<Page> getBookedTicket(Pageable pageable) {
-        Page list = ticketService.getBookedTicket(pageable);
+        Page<BookedTicket> list = ticketService.getBookedTicket(pageable);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
