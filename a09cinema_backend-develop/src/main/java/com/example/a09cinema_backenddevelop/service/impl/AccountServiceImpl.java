@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import  com.example.a09cinema_backenddevelop.service.AccountService;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -27,12 +28,17 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void save(Account account) {
-        accountRepository.save(account);
+    public Account save(Account account) {
+        return accountRepository.save(account);
     }
 
     @Override
-    public Account findById(long id) {
+    public Optional<Account> findById(long id) {
         return accountRepository.findAccountId(id);
     }
+
+//    @Override
+//    public void editMember(Account account) {
+//        accountRepository.editMember(account.getId(), account.getFullname(), account.getPassword(), account.getBirthday(), account.getGender(), account.getEmail(), account.getPhone(), account.getAddress());
+//    }
 }

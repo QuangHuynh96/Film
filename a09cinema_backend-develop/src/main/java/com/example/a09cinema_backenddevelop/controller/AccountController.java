@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {
@@ -29,17 +32,48 @@ public class AccountController {
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
-    @GetMapping("/edit/{id}")
-    public ResponseEntity<Account> showEdit(@PathVariable long id){
-       // model.addAttribute("account", accountService.findById(id));
-        return ResponseEntity.ok(accountService.findById(id));
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Account> findAccountById(@PathVariable Long id) {
+        Optional<Account> accountOptional = accountService.findById(id);
+        if (!accountOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(accountOptional.get(), HttpStatus.OK);
     }
 
-    @PatchMapping("/edit")
-    public ResponseEntity<Account> edit(Account account){
-        accountService.save(account);
-        return new ResponseEntity<>(account, HttpStatus.OK);
+    @PutMapping("edit/{id}")
+    public ResponseEntity<Account> editAccount(@PathVariable Long id, @RequestBody Account account) {
+        Optional<Account> accountOptional = accountService.findById(id);
+        if (!accountOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        account.setId(accountOptional.get().getId());
+//        accountService.editMember(account);
+        return new ResponseEntity<>(accountService.save(account), HttpStatus.OK);
     }
+
+//    @PostMapping("/edit")
+//    public ResponseEntity<Account> save(@RequestParam Long id, @Valid @RequestBody Account account){
+//        if (accountService.findById(id) == null){
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        account.setId(id);
+//        accountService.editMember(account);
+//        return new ResponseEntity<>(account, HttpStatus.OK);
+//    }
+
+//    @GetMapping("/edit/{id}")
+//    public ResponseEntity<Account> showEdit(@PathVariable long id){
+//       // model.addAttribute("account", accountService.findById(id));
+//        return ResponseEntity.ok(accountService.findById(id));
+//    }
+
+//
+//    @PatchMapping("/edit")
+//    public ResponseEntity<Account> edit(Account account){
+//        accountService.save(account);
+//        return new ResponseEntity<>(account, HttpStatus.OK);
+//    }
 
 //    @GetMapping("/list")
 //    public ResponseEntity<List<Account>> findAllAccount() {
