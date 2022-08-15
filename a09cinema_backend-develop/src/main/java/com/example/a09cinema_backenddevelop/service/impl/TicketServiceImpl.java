@@ -1,6 +1,7 @@
 package com.example.a09cinema_backenddevelop.service.impl;
 
 import com.example.a09cinema_backenddevelop.model.BookedTicket;
+import com.example.a09cinema_backenddevelop.model.entity.Ticket;
 import com.example.a09cinema_backenddevelop.repository.TicketRepository;
 import com.example.a09cinema_backenddevelop.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class TicketServiceImpl implements TicketService {
         return ticketRepository.getBookedTicket(pageable);
     }
 
-//    @Override
-//    public BookedTicket findById(Long id) {
-////        return ticketRepository.getById(id);
-//    }
+    @Override
+    public Ticket findById(Long id) {
+        return ticketRepository.getById(id);
+    }
 }

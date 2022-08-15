@@ -1,6 +1,7 @@
 package com.example.a09cinema_backenddevelop.controller;
 
 import com.example.a09cinema_backenddevelop.model.BookedTicket;
+import com.example.a09cinema_backenddevelop.model.entity.Ticket;
 import com.example.a09cinema_backenddevelop.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,5 +27,11 @@ public class TicketController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Ticket> deleteTicket(@PathVariable Long id ){
+        Ticket ticket=ticketService.findById(id);
+        ticket.setIsDeleted(true);
+        return new ResponseEntity<Ticket>(ticket,HttpStatus.OK);
     }
 }
