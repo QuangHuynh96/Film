@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface TicketService {
     Page<BookedTicket> getBookedTicket(Pageable pageable);
+//BookedTicket findById(Long id);
 }

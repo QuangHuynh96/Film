@@ -11,6 +11,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private Boolean isDeleted;
 
     @ManyToOne
     @JoinColumn(name = "booking_id", referencedColumnName = "id")

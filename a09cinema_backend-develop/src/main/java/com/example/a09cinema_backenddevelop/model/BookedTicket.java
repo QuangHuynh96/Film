@@ -1,13 +1,16 @@
 package com.example.a09cinema_backenddevelop.model;
 
 import java.time.LocalDateTime;
+
 public class BookedTicket {
     private String name;
     private LocalDateTime dayTimeBooking;
     private double totalPrice;
     private boolean received;
 
-    public BookedTicket( String name, LocalDateTime dayTimeBooking, double totalPrice, boolean received) {
+    private boolean isDeleted;
+
+    public BookedTicket(String name, LocalDateTime dayTimeBooking, double totalPrice, boolean received) {
         this.name = name;
         this.dayTimeBooking = dayTimeBooking;
         this.totalPrice = totalPrice;
@@ -45,4 +48,13 @@ public class BookedTicket {
     public void setReceived(boolean received) {
         this.received = received;
     }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 }
+

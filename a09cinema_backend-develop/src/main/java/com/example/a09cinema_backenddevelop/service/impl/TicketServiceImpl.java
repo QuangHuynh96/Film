@@ -18,4 +18,9 @@ public class TicketServiceImpl implements TicketService {
     public Page getBookedTicket(Pageable pageable) {
         return ticketRepository.getBookedTicket(pageable);
     }
+
+//    @Override
+//    public BookedTicket findById(Long id) {
+////        return ticketRepository.getById(id);
+//    }
 }
