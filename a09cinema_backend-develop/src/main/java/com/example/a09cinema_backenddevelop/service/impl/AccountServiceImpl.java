@@ -2,15 +2,25 @@ package com.example.a09cinema_backenddevelop.service.impl;
 
 import com.example.a09cinema_backenddevelop.model.entity.Account;
 import com.example.a09cinema_backenddevelop.repository.AccountRepository;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import com.example.a09cinema_backenddevelop.service.AccountService;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 @Service
 public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @Override
     public Account findById(Long id) {
@@ -50,5 +60,49 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account saveAccount(Account account) {
         return accountRepository.save(account);
+    }
+
+    @Override
+    public void addVerificationCode(String username) throws MessagingException, UnsupportedEncodingException {
+        String code = RandomString.make(10);
+        accountRepository.addVerificationCode(code, username);
+        Account account = accountRepository.findAccountByVerificationCode(code);
+        this.sendVerificationEmailForResetPassWord(account.getFullname(), code, account.getEmail());
+    }
+
+    @Override
+    public Boolean findAccountByVerificationCodeToResetPassword(String code) {
+        Account account = accountRepository.findAccountByVerificationCode(code);
+        if (account == null || account.isEnable()) {
+            return false;
+        } else {
+            account.setEnabled(true);
+            account.setVerificationCode(null);
+            accountRepository.save(account);
+            return true;
+        }
+    }
+
+    @Override
+    public void saveNewPassword(String password, String code) {
+        accountRepository.saveNewPassword(password,code);
+    }
+
+    public void sendVerificationEmailForResetPassWord(String userName, String randomCode, String email)
+            throws MessagingException, UnsupportedEncodingException {
+        String subject = "Hãy xác thực email của bạn";
+        String mailContent = "";
+        String confirmUrl = "http://localhost:4200/verify-reset-password?code=" + randomCode;
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+        helper.setFrom("luongquanghuynh264@gmail.com","A0921I1");
+        helper.setTo(email);
+        helper.setSubject(subject);
+        mailContent = "<p sytle='color:red;'>Xin chào " + userName + " ,<p>" + "<p> Nhấn vào link sau để xác thực email của bạn:</p>" +
+                "<h3><a href='" + confirmUrl + "'>Link Xác thực( nhấn vào đây)!</a></h3>" +
+                "<p>NHÓM DỰ ÁN</p>";
+        helper.setText(mailContent, true);
+        javaMailSender.send(message);
     }
 }
