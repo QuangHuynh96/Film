@@ -1,10 +1,10 @@
 package com.example.a09cinema_backenddevelop.service;
 
-import com.example.a09cinema_backenddevelop.model.entity.Account;
+import com.example.a09cinema_backenddevelop.DTO.StatisticAccount;
 
 import java.util.List;
 
 public interface AccountStatisticService {
 
-    List<?> statisticalByAccount();
+    List<StatisticAccount> statisticalByAccountDay();
 }

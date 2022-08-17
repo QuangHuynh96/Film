@@ -1,6 +1,6 @@
 package com.example.a09cinema_backenddevelop.service.impl;
 
-import com.example.a09cinema_backenddevelop.model.entity.Ticket;
+import com.example.a09cinema_backenddevelop.DTO.StatisticFilm;
 import com.example.a09cinema_backenddevelop.repository.FilmStatsticRepository;
 import com.example.a09cinema_backenddevelop.service.FilmStatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,18 @@ public class FilmStatisticServiceImpl implements FilmStatisticService {
 
 
     @Override
-    public List<?> statisticalByCurrentDay() {
+    public List<StatisticFilm> statisticalByCurrentDay() {
         return filmStatsticRepository.statisticalByCurrentDay();
     }
+
+    @Override
+    public String countNameFilm() {
+        return filmStatsticRepository.countNameFilm();
+    }
+
+    @Override
+    public String countTicket() {
+        return filmStatsticRepository.countTicket();
+    }
+
 }

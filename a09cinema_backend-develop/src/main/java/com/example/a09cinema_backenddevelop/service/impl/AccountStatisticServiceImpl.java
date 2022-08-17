@@ -1,8 +1,7 @@
 package com.example.a09cinema_backenddevelop.service.impl;
 
-import com.example.a09cinema_backenddevelop.model.entity.Account;
+import com.example.a09cinema_backenddevelop.DTO.StatisticAccount;
 import com.example.a09cinema_backenddevelop.repository.AccountStatisticRepository;
-import com.example.a09cinema_backenddevelop.service.AccountService;
 import com.example.a09cinema_backenddevelop.service.AccountStatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class AccountStatisticServiceImpl implements AccountStatisticService {
     private AccountStatisticRepository accountStatisticRepository;
 
     @Override
-    public List<?> statisticalByAccount() {
-        return accountStatisticRepository.statisticalByAccount();
+    public List<StatisticAccount> statisticalByAccountDay() {
+        return accountStatisticRepository.statisticalByAccountDay();
     }
 }

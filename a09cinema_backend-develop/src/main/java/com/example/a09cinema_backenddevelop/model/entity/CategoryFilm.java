@@ -9,17 +9,16 @@ import javax.persistence.*;
 @Data
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
-public class FilmImg {
+public class CategoryFilm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    private String urlImg;
-
     @ManyToOne
     @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Film film;
 
-    public FilmImg() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+
 }

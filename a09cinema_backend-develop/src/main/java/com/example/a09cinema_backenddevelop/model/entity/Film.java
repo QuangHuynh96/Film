@@ -1,5 +1,7 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,31 +25,18 @@ public class Film {
     private String trailer;
     private String studioName;
 
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<Category> categories;
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<FilmImg> filmImgs;
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    private List<SeatDetail> seatDetails;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    private List<CategoryFilm> categoryFilms;
+
 
     public Film() {
-    }
-
-    public Film(long id, String name, Date startDate, Date endDate, String actor, String director, String duration, String trailer, String studioName, List<Category> categories, List<FilmImg> filmImgs, List<Ticket> tickets) {
-        this.id = id;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.actor = actor;
-        this.director = director;
-        this.duration = duration;
-        this.trailer = trailer;
-        this.studioName = studioName;
-        this.categories = categories;
-        this.filmImgs = filmImgs;
-        this.tickets = tickets;
     }
 
     public long getId() {
@@ -122,14 +111,6 @@ public class Film {
         this.studioName = studioName;
     }
 
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
     public List<FilmImg> getFilmImgs() {
         return filmImgs;
     }
@@ -138,11 +119,19 @@ public class Film {
         this.filmImgs = filmImgs;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
+    public List<SeatDetail> getSeatDetails() {
+        return seatDetails;
     }
 
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+    public void setSeatDetails(List<SeatDetail> seatDetails) {
+        this.seatDetails = seatDetails;
+    }
+
+    public List<CategoryFilm> getCategoryFilms() {
+        return categoryFilms;
+    }
+
+    public void setCategoryFilms(List<CategoryFilm> categoryFilms) {
+        this.categoryFilms = categoryFilms;
     }
 }
