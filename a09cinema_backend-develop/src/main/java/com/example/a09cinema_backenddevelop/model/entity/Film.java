@@ -34,7 +34,7 @@ public class Film {
     private List<FilmImg> filmImgs;
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-//    @JsonBackReference
+    @JsonBackReference
     private List<SeatDetail> seatDetails;
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
@@ -43,3 +43,4 @@ public class Film {
 
 
 }
+

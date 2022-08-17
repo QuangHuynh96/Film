@@ -21,3 +21,4 @@ public class FilmImg {
     @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Film film;
 }
+

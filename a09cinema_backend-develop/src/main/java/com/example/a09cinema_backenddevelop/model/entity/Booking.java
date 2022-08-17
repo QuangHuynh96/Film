@@ -1,5 +1,6 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
@@ -32,6 +33,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JsonBackReference("account-booking")
     private Account account;
 
 //    @OneToOne(mappedBy = "booking")

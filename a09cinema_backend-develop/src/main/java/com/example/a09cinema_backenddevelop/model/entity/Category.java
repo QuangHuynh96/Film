@@ -1,16 +1,19 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
+
+
 @Data
 @Entity
-//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,3 +24,4 @@ public class Category {
     private List<CategoryFilm> categoryFilms;
 
 }
+
