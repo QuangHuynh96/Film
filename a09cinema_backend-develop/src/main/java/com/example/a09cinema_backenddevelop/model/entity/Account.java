@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
@@ -19,7 +20,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

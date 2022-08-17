@@ -8,7 +8,7 @@ import lombok.Data;
 import javax.persistence.*;
 @Entity
 @Data
-@JsonIdentityInfo(generator= JSOGGenerator.class)
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class AccountRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

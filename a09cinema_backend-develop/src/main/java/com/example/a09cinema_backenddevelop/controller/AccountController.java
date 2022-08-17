@@ -9,13 +9,17 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/account")
+@CrossOrigin("*")
 public class AccountController {
 
     @Autowired
@@ -41,8 +45,10 @@ public class AccountController {
         return new ResponseEntity<>(accountOptional.get(), HttpStatus.OK);
     }
 
-    @PutMapping("edit/{id}")
-    public ResponseEntity<Account> editAccount(@PathVariable Long id, @RequestBody Account account) {
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Account> editAccount(@PathVariable Long id,
+                                               @Valid
+                                               @RequestBody Account account) {
         Optional<Account> accountOptional = accountService.findById(id);
         if (!accountOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -50,6 +56,7 @@ public class AccountController {
         account.setId(accountOptional.get().getId());
 //        accountService.editMember(account);
         return new ResponseEntity<>(accountService.save(account), HttpStatus.OK);
+        }
     }
 
 //    @PostMapping("/edit")
@@ -83,4 +90,3 @@ public class AccountController {
 //        }
 //        return new ResponseEntity<>(accounts, HttpStatus.OK);
 //    }
-}
