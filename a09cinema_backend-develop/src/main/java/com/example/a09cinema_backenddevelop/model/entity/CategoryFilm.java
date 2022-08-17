@@ -5,19 +5,19 @@ import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
-
 @Data
 @Entity
-@JsonIdentityInfo(generator= JSOGGenerator.class)
-public class Room {
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
+public class CategoryFilm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;
-    private int size;
-    private boolean status;
+    @ManyToOne
+    @JoinColumn(name = "film_id", referencedColumnName = "id")
+    private Film film;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private List<SeatDetail> seatDetail;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+
 }
