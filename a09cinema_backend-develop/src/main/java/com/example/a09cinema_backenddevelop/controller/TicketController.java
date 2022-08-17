@@ -5,14 +5,12 @@ import com.example.a09cinema_backenddevelop.model.entity.Ticket;
 import com.example.a09cinema_backenddevelop.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/ticket")
@@ -28,10 +26,9 @@ public class TicketController {
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-    @PatchMapping("/{id}")
+    @PatchMapping("/deleteTicket/{id}")
     public ResponseEntity<Ticket> deleteTicket(@PathVariable Long id ){
-        Ticket ticket=ticketService.findById(id);
-        ticket.setIsDeleted(true);
-        return new ResponseEntity<Ticket>(ticket,HttpStatus.OK);
+        ticketService.deleteTicket(id);
+        return new ResponseEntity<Ticket>(HttpStatus.OK);
     }
 }

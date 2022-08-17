@@ -3,6 +3,7 @@ package com.example.a09cinema_backenddevelop.model;
 import java.time.LocalDateTime;
 
 public class BookedTicket {
+    private Long id;
     private String name;
     private LocalDateTime dayTimeBooking;
     private double totalPrice;
@@ -15,6 +16,22 @@ public class BookedTicket {
         this.dayTimeBooking = dayTimeBooking;
         this.totalPrice = totalPrice;
         this.received = received;
+    }
+
+    public BookedTicket(Long id, String name, LocalDateTime dayTimeBooking, double totalPrice, boolean received) {
+        this.id = id;
+        this.name = name;
+        this.dayTimeBooking = dayTimeBooking;
+        this.totalPrice = totalPrice;
+        this.received = received;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -57,4 +74,3 @@ public class BookedTicket {
         isDeleted = deleted;
     }
 }
-

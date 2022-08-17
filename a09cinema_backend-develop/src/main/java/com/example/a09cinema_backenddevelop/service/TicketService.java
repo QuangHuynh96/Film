@@ -9,4 +9,5 @@ public interface TicketService {
     Page<BookedTicket> getBookedTicket(Pageable pageable);
 
     Ticket findById(Long id);
+    void deleteTicket(Long id);
 }

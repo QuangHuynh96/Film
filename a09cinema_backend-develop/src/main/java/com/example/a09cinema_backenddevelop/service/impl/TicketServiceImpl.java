@@ -1,6 +1,5 @@
 package com.example.a09cinema_backenddevelop.service.impl;
 
-import com.example.a09cinema_backenddevelop.model.BookedTicket;
 import com.example.a09cinema_backenddevelop.model.entity.Ticket;
 import com.example.a09cinema_backenddevelop.repository.TicketRepository;
 import com.example.a09cinema_backenddevelop.service.TicketService;
@@ -8,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -22,6 +19,11 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket findById(Long id) {
-        return ticketRepository.getById(id);
+        return ticketRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteTicket(Long id) {
+        ticketRepository.deleteTicket(id);
     }
 }
