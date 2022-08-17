@@ -3,23 +3,22 @@ package com.example.a09cinema_backenddevelop.model.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
-//import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
 import javax.persistence.*;
-@Entity
+
 @Data
-@JsonIdentityInfo(generator= JSOGGenerator.class)
-public class AccountRole {
+@Entity
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
+public class CategoryFilm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne
+    @JoinColumn(name = "film_id", referencedColumnName = "id")
+    private Film film;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private Role role;
-
-    @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private Account account;
-
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
 
 }
