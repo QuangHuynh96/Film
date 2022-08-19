@@ -1,21 +1,14 @@
 package com.example.a09cinema_backenddevelop.model.entity;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-//import com.voodoodyne.jackson.jsog.JSOGGenerator;
-
-import lombok.Data;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Data
-//@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +27,11 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
-    @JsonBackReference
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
 
 //    @OneToOne(mappedBy = "booking")
 //    private History history;
+@OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+private List<SeatDetail> seatDetails;
 
     public Booking() {
     }
@@ -108,11 +100,11 @@ public class Booking {
         this.account = account;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
+    public List<SeatDetail> getSeatDetails() {
+        return seatDetails;
     }
 
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+    public void setSeatDetails(List<SeatDetail> seatDetails) {
+        this.seatDetails = seatDetails;
     }
 }

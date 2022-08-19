@@ -6,22 +6,22 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
-
 @Data
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
-public class Time {
+public class CategoryFilm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne
+    @JoinColumn(name = "film_id", referencedColumnName = "id")
+    private Film film;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
 
-    @OneToMany(mappedBy = "time", cascade = CascadeType.ALL)
-    private List<SeatDetail> seatDetail;
-
-    private String timeShow;
-
-    public Time() {
+    public CategoryFilm() {
     }
 
     public long getId() {
@@ -32,19 +32,19 @@ public class Time {
         this.id = id;
     }
 
-    public List<SeatDetail> getSeatDetail() {
-        return seatDetail;
+    public Film getFilm() {
+        return film;
     }
 
-    public void setSeatDetail(List<SeatDetail> seatDetail) {
-        this.seatDetail = seatDetail;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 
-    public String getTimeShow() {
-        return timeShow;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setTimeShow(String timeShow) {
-        this.timeShow = timeShow;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

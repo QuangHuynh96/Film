@@ -1,21 +1,14 @@
 package com.example.a09cinema_backenddevelop.model.entity;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
-//import com.voodoodyne.jackson.jsog.JSOGGenerator;
-
-import lombok.Data;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 @Entity
-@Data
-//@JsonIdentityInfo(generator= JSOGGenerator.class)
+
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,11 +45,11 @@ public class Account {
 
     private String provider;
 
-    @JsonBackReference
+
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<AccountRole> accountRoles;
-    @JsonBackReference
+
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 

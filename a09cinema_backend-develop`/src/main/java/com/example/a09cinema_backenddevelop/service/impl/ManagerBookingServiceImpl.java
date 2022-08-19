@@ -1,4 +1,6 @@
 package com.example.a09cinema_backenddevelop.service.impl;
+import com.example.a09cinema_backenddevelop.dto.SelectAllBookingDto;
+import com.example.a09cinema_backenddevelop.dto.SelectBookingDetail;
 import com.example.a09cinema_backenddevelop.model.entity.Booking;
 import com.example.a09cinema_backenddevelop.repository.ManagerBookingRepository;
 import com.example.a09cinema_backenddevelop.service.ManagerBookingService;
@@ -16,14 +18,16 @@ public class ManagerBookingServiceImpl implements ManagerBookingService {
     private ManagerBookingRepository repository;
 
     @Override
-    public Page<Booking> findAll(String key, Pageable pageable) {
-        return repository.findAll(key, pageable);
+    public Page<SelectAllBookingDto> findAll(String key, Pageable pageable) {
+
+        return repository.findAll(key,pageable);
     }
 
-    @Override
-    public Booking findBookingById(Long id) {
-        return repository.findBookingById(id);
-    }
+//    @Override
+//    public Optional<Booking findBookingById(Long id) {
+//        return repository.findBookingById(id);
+//    }
+
 
 //    @Override
 //    public void takeTicket(Booking booking) {
@@ -39,5 +43,10 @@ public class ManagerBookingServiceImpl implements ManagerBookingService {
     @Override
     public void save(Booking booking) {
         repository.save(booking);
+    }
+
+    @Override
+    public Optional<SelectBookingDetail> selectBookingDetail(Long id) {
+        return repository.selectBookingDetail(id);
     }
 }

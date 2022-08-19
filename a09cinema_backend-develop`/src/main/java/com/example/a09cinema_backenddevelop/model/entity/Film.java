@@ -1,6 +1,7 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,15 +24,16 @@ public class Film {
     private String duration;
     private String trailer;
     private String studioName;
-    @JsonBackReference
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<Category> categories;
-    @JsonBackReference
+
+
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<FilmImg> filmImgs;
-    @JsonBackReference
+
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    private List<SeatDetail> seatDetails;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    private List<CategoryFilm> categoryFilms;
 
     public Film() {
     }
@@ -108,14 +110,6 @@ public class Film {
         this.studioName = studioName;
     }
 
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
     public List<FilmImg> getFilmImgs() {
         return filmImgs;
     }
@@ -124,11 +118,19 @@ public class Film {
         this.filmImgs = filmImgs;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
+    public List<SeatDetail> getSeatDetails() {
+        return seatDetails;
     }
 
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+    public void setSeatDetails(List<SeatDetail> seatDetails) {
+        this.seatDetails = seatDetails;
+    }
+
+    public List<CategoryFilm> getCategoryFilms() {
+        return categoryFilms;
+    }
+
+    public void setCategoryFilms(List<CategoryFilm> categoryFilms) {
+        this.categoryFilms = categoryFilms;
     }
 }

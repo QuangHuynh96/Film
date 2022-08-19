@@ -1,12 +1,15 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
-
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +18,8 @@ public class Room {
     private int size;
     private boolean status;
 
-    @ManyToOne
-    @JoinColumn(name = "seatdetail_id", referencedColumnName = "id")
-    private SeatDetail seatDetail;
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private List<SeatDetail> seatDetail;
 
     public Room() {
     }
@@ -54,11 +56,11 @@ public class Room {
         this.status = status;
     }
 
-    public SeatDetail getSeatDetail() {
+    public List<SeatDetail> getSeatDetail() {
         return seatDetail;
     }
 
-    public void setSeatDetail(SeatDetail seatDetail) {
+    public void setSeatDetail(List<SeatDetail> seatDetail) {
         this.seatDetail = seatDetail;
     }
 }

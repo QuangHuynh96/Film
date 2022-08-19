@@ -1,6 +1,7 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class SeatDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,17 +20,23 @@ public class SeatDetail {
     private boolean status;
 
     @ManyToOne
-    @JoinColumn(name = "ticket_id", referencedColumnName = "id")
-    private Ticket ticket;
-    @JsonBackReference
-    @OneToMany(mappedBy = "seatDetail", cascade = CascadeType.ALL)
-    private List<Time> times;
-    @JsonBackReference
-    @OneToMany(mappedBy = "seatDetail", cascade = CascadeType.ALL)
-    private List<Room> rooms;
-    @JsonBackReference
-    @OneToMany(mappedBy = "seatDetail", cascade = CascadeType.ALL)
-    private List<Seat> seats;
+    @JoinColumn(name = "time_id", referencedColumnName = "id")
+    private Time time;
+
+    @ManyToOne
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    private Room room;
+
+    @ManyToOne
+    @JoinColumn(name = "seat_id", referencedColumnName = "id")
+    private Seat seat;
+
+    @ManyToOne
+    @JoinColumn(name = "film_id", referencedColumnName = "id")
+    private Film film;
+    @ManyToOne
+    @JoinColumn(name = "booking_id", referencedColumnName = "id")
+    private Booking booking;
 
     public SeatDetail() {
     }
@@ -66,35 +73,35 @@ public class SeatDetail {
         this.status = status;
     }
 
-    public Ticket getTicket() {
-        return ticket;
+    public Time getTime() {
+        return time;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void setTime(Time time) {
+        this.time = time;
     }
 
-    public List<Time> getTimes() {
-        return times;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setTimes(List<Time> times) {
-        this.times = times;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
+    public Seat getSeat() {
+        return seat;
     }
 
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
+    public void setSeat(Seat seat) {
+        this.seat = seat;
     }
 
-    public List<Seat> getSeats() {
-        return seats;
+    public Film getFilm() {
+        return film;
     }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 }
