@@ -1,4 +1,4 @@
-package com.example.a09cinema_backenddevelop.config;
+package com.example.a09cinema_backenddevelop.controller.config;
 
 import com.example.a09cinema_backenddevelop.security.jwt.JwtEntryPoint;
 import com.example.a09cinema_backenddevelop.security.jwt.JwtTokenFilter;
