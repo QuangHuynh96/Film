@@ -70,6 +70,7 @@ public class AccountController {
         if (accountService.existsByEmail(account.getEmail())){
             System.out.println("Email đã được đăng kí");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         String passWord=account.getPassword();
         account.setPassword(passwordEncoder.encode(passWord));
