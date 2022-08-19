@@ -125,6 +125,14 @@ public class AccountPrinciple implements UserDetails {
         return true;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean isEnabled() {
         return true;

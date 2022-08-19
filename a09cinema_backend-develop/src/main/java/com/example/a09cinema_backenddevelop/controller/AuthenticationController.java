@@ -2,8 +2,10 @@ package com.example.a09cinema_backenddevelop.controller;
 
 import com.example.a09cinema_backenddevelop.model.entity.Account;
 import com.example.a09cinema_backenddevelop.model.entity.Role;
+import com.example.a09cinema_backenddevelop.payload.request.ResetPassRequest;
 import com.example.a09cinema_backenddevelop.payload.request.SignInForm;
 import com.example.a09cinema_backenddevelop.payload.request.SignUpForm;
+import com.example.a09cinema_backenddevelop.payload.request.VerifyRequest;
 import com.example.a09cinema_backenddevelop.payload.response.JwtResponse;
 import com.example.a09cinema_backenddevelop.payload.response.ResponseMessage;
 import com.example.a09cinema_backenddevelop.security.accountprincal.AccountPrinciple;
@@ -20,7 +22,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,47 +53,37 @@ public class AuthenticationController {
         String token = jwtProvider.createToken(authentication);
         AccountPrinciple accountPrinciple = (AccountPrinciple) authentication.getPrincipal();
         return ResponseEntity.ok(
-                new JwtResponse(token, accountPrinciple.getFullName(), accountPrinciple.getAuthorities())
+                new JwtResponse(token, accountPrinciple.getUsername(), accountPrinciple.getId(), accountPrinciple.getAuthorities())
         );
     }
 
-//    @PostMapping("/signup")
-//    public ResponseEntity<?> register(@Valid @RequestBody SignUpForm signUpForm) {
-//        if (accountService.existsByUsername(signUpForm.getUsername())) {
-//            return new ResponseEntity<>(new ResponseMessage("Account already exists"), HttpStatus.OK);
-//        }
-//        if (accountService.existsByEmail(signUpForm.getEmail())) {
-//            return new ResponseEntity<>(new ResponseMessage("Email already exists"), HttpStatus.OK);
-//        }
-//        Account account = new Account(
-//                signUpForm.getName(),
-//                signUpForm.getUsername(),
-//                signUpForm.getEmail(),
-//                passwordEncoder.encode(signUpForm.getPassword())
-//        );
-//
-//        Set<String> strRoles = signUpForm.getRoles();
-//        Set<Role> roles = new HashSet<>();
-//        strRoles.forEach(role -> {
-//            switch (role) {
-//                case "ADMIN":
-//                    try {
-//                        Role adminRole = roleService.findByName("ADMIN");
-//                        roles.add(adminRole);
-//                    } catch (Exception e) {
-//                    }
-//                    break;
-//                case "member":
-//                    try {
-//                        Role memberRole = roleService.findByName("MEMBER");
-//                        roles.add(memberRole);
-//                    } catch (Exception e) {
-//                    }
-//                    break;
-//            }
-//        });
-//        account.setRoles(roles);
-//        accountService.save(account);
-//        return new ResponseEntity<>(new ResponseMessage("create success!!!"), HttpStatus.OK);
-//    }
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> reset(@RequestBody SignInForm signInForm) throws MessagingException, UnsupportedEncodingException {
+
+        if (accountService.existsByUsername(signInForm.getUsername()) != null) {
+            accountService.addVerificationCode(signInForm.getUsername());
+            return ResponseEntity.ok(new ResponseMessage("Sent email "));
+        }
+
+        return ResponseEntity.badRequest().body(new ResponseMessage("Tài khoản không đúng"));
+    }
+
+    @PostMapping("/verify-password")
+    public ResponseEntity<?> VerifyPassword(@RequestBody VerifyRequest code) {
+        Boolean isVerified = accountService.findAccountByVerificationCodeToResetPassword(code.getCode());
+        if (isVerified) {
+            return ResponseEntity.ok(new ResponseMessage("accepted"));
+        } else {
+            return ResponseEntity.ok(new ResponseMessage("error"));
+        }
+    }
+
+    @PostMapping("/do-reset-password")
+    public ResponseEntity<?> doResetPassword(@RequestBody ResetPassRequest resetPassRequest) {
+        accountService.saveNewPassword(
+                passwordEncoder.encode(resetPassRequest.getPassword()),
+                resetPassRequest.getCode()
+        );
+        return ResponseEntity.ok(new ResponseMessage("success"));
+    }
 }
