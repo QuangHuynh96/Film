@@ -27,6 +27,11 @@ public class AccountController {
         }
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
+    @GetMapping("/checkExistEmail")
+    public boolean checkExistEmail(@RequestParam String email) {
+        return accountService.existsByEmail(email);
+    }
+
     @PostMapping("/updatePassword")
     public ResponseEntity<Account> updatePassword(@RequestParam Long id,
                                                   @RequestParam String oldPass,
