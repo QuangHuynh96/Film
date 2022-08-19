@@ -5,7 +5,6 @@ import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 @Data
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)

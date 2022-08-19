@@ -1,6 +1,5 @@
 package com.example.a09cinema_backenddevelop.service.impl;
 
-import com.example.a09cinema_backenddevelop.model.entity.Film;
 import com.example.a09cinema_backenddevelop.model.entity.FilmImg;
 import com.example.a09cinema_backenddevelop.repository.FilmImgRepository;
 import com.example.a09cinema_backenddevelop.service.FilmImgService;

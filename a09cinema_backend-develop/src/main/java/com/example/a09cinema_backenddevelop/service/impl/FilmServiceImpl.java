@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,8 +16,8 @@ public class FilmServiceImpl implements FilmService {
     private FilmRepository filmRepository;
 
     @Override
-    public List<Film> findAll() {
-        return filmRepository.findAll();
+    public Page<Film> search(String value,Pageable pageable) {
+        return filmRepository.search(value, value, pageable);
     }
 
     @Override
@@ -34,10 +33,5 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public void deleteById(Long id) {
         filmRepository.deleteById(id);
-    }
-
-    @Override
-    public Page<Film> searchByName(String name, Pageable pageable) {
-        return filmRepository.findByNameContaining(name, pageable);
     }
 }

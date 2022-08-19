@@ -24,6 +24,7 @@ public class Film {
     private String duration;
     private String trailer;
     private String studioName;
+    private boolean isDeletedFlag = false;
 
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)

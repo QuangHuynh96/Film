@@ -8,8 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -48,8 +46,8 @@ public class FilmController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<Film>> searchByName(String name,Pageable pageable) {
-        Page<Film> films = filmService.searchByName(name, pageable);
+    public ResponseEntity<Page<Film>> search(String value,Pageable pageable) {
+        Page<Film> films = filmService.search(value, pageable);
         if(films.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
