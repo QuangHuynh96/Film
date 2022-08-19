@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -15,7 +16,8 @@ import java.util.List;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +35,11 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    @JsonBackReference("account-booking")
+//    @JsonBackReference("account-booking")
     private Account account;
+
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+    private List<SeatDetail> seatDetails;
 
 //    @OneToOne(mappedBy = "booking")
 //    private History history;

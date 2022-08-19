@@ -36,4 +36,8 @@ public class SeatDetail {
     @ManyToOne
     @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Film film;
+
+    @ManyToOne
+    @JoinColumn(name = "booking_id", referencedColumnName = "id")
+    private Booking booking;
 }
