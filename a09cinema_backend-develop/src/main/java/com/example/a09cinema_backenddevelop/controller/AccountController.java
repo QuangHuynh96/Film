@@ -1,7 +1,6 @@
 package com.example.a09cinema_backenddevelop.controller;
 
 import com.example.a09cinema_backenddevelop.model.entity.Account;
-import com.example.a09cinema_backenddevelop.payload.response.ResponseMessage;
 import com.example.a09cinema_backenddevelop.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
