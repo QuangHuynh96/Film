@@ -45,7 +45,7 @@ public class FilmController {
         return new ResponseEntity<>(filmOptional.get(), HttpStatus.OK);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/list/search")
     public ResponseEntity<Page<Film>> search(String value,Pageable pageable) {
         Page<Film> films = filmService.search(value, pageable);
         if(films.isEmpty()) {
