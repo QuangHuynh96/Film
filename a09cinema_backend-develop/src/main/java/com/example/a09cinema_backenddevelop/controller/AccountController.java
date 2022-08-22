@@ -14,16 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AccountController {
     @Autowired
     private AccountService accountService;
-
     @GetMapping(value = "employee/list")
-    public Page<Account> getAllEmployee(@PageableDefault(10)Pageable pageable, @RequestParam("search") Optional<String> search) {
+    public Page<Account> getAllEmployee(@PageableDefault(5)Pageable pageable, @RequestParam("search") Optional<String> search) {
         if(search.isPresent()){
             return accountService.searchEmployee(pageable,search.get());
         }
@@ -40,17 +38,4 @@ public class AccountController {
         accountService.deleteEmployeeAccountById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    //    @PostMapping("/employee/create")
-//    public ResponseEntity<Account> saveFilm(@RequestBody Account account) {
-//        return new ResponseEntity<>(accountService.save(Optional.ofNullable(account)), HttpStatus.CREATED);
-//    }
-//    @PutMapping("employee/update/{id}")
-//    public ResponseEntity<Account> updateFilm(@PathVariable Long id, @RequestBody Account account) {
-//        Optional<Account> account1 = accountService.findEmployeeById(id);
-//        if (account1 ==null) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        account.setId(account1.get().getId());
-//        return new ResponseEntity<>(accountService.save(Optional.ofNullable(account)), HttpStatus.OK);
-//    }
 }

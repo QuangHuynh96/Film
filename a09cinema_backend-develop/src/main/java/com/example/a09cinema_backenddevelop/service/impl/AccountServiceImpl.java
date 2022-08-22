@@ -14,15 +14,17 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
     @Autowired private AccountRepository accountRepository;
 
+
+    @Override
+    public Page<Account> searchEmployee(Pageable pageable, String s) {
+        return accountRepository.getSearchAllEmployee(pageable,s);
+    }
+
     @Override
     public Page<Account> listEmployee(Pageable pageable) {
         return accountRepository.getAllEmployee(pageable);
     }
 
-    @Override
-    public Page<Account> searchEmployee(Pageable pageable,String search) {
-        return accountRepository.getSearchAllEmployee(pageable,search);
-    }
     @Override
     public void deleteEmployeeAccountById(Long id) {
         accountRepository.deleteEmployeeAccountById(id);

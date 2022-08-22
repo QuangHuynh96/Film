@@ -80,6 +80,7 @@ public class Account {
         isEnabled = enabled;
     }
 
+
     @ManyToMany
     @JsonBackReference
     @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

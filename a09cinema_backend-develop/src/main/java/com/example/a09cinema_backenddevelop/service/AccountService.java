@@ -9,14 +9,8 @@ import java.util.Optional;
 
 public interface AccountService {
     Page<Account> listEmployee(Pageable pageable);
-    Page<Account> searchEmployee(Pageable pageable,String search);
-
+    Page<Account> searchEmployee(Pageable pageable, String s);
     void deleteEmployeeAccountById(Long id);
 
     Optional<Account> findEmployeeById(Long id);
-
-    Account save(Optional<Account> accountOptional);
-
-
-//    Object updateEmployee(long id, Account account);
 }
