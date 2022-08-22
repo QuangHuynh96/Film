@@ -21,6 +21,11 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
+    public Page<Film> findSort(Pageable pageable) {
+        return filmRepository.findSort(pageable);
+    }
+
+    @Override
     public Page<Film> search(String value, Pageable pageable) {
         return filmRepository.search(value, value, pageable);
     }

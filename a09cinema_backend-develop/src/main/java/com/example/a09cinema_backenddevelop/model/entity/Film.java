@@ -11,8 +11,7 @@ import java.util.List;
 
 @Data
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

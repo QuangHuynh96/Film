@@ -37,4 +37,12 @@ public ResponseEntity<Page<Film>> search(String value,Pageable pageable) {
         }
         return new ResponseEntity<>(films, HttpStatus.OK);
     }
+    @GetMapping("/date")
+    public ResponseEntity<Page<Film>> findSortWithPage(Pageable pageable) {
+        Page<Film> films = filmService.findAll(pageable);
+        if(films.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(films, HttpStatus.OK);
+    }
 }
