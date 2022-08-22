@@ -4,7 +4,4 @@ import java.util.Date;
 
 public interface SeatDetailDto {
     long getId();
-    String getName();
-    String getDate_show();
-    long getTime_id();
 }

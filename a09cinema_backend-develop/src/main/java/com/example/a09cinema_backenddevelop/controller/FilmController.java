@@ -45,8 +45,8 @@ public class FilmController {
 
     @GetMapping(value = "timeShowOfFilm/")
     public ResponseEntity<List<TimeDto>> getTimeShowOfFilmById(@RequestParam(value = "date_show") String date_show, @RequestParam(value = "film_id") String film_id) {
-        System.out.println(date_show);
-        System.out.println(film_id);
+//        System.out.println(date_show);
+//        System.out.println(film_id);
         List<TimeDto> timeDtos= timeService.findAllTimeShowBySeatDetail(date_show,film_id);
         System.out.println(timeDtos);
         return ResponseEntity.ok(timeService.findAllTimeShowBySeatDetail(date_show,film_id));
@@ -57,6 +57,12 @@ public class FilmController {
         return ResponseEntity.ok(filmService.findFilmByID(id));
     }
 
+    @GetMapping(value = "getAllSeatDetailByIdSeat/{id}")
+    public ResponseEntity<List<SeatDetail>> getAllSeatDetailByIdSeat(@PathVariable(value = "id") long id) {
+        SeatDetail tmp = seatDetailService.getInfoSeatDetailById(id);
+        System.out.println(seatDetailService.getAllSeatDetailByIdToChoose(tmp.getDateShow(),tmp.getFilm().getId(),tmp.getRoom().getId(),tmp.getTime().getId()));
+        return ResponseEntity.ok(seatDetailService.getAllSeatDetailByIdToChoose(tmp.getDateShow(),tmp.getFilm().getId(),tmp.getRoom().getId(),tmp.getTime().getId()));
+    }
     ///{name}/{dateShow}/{time_id}
 //    @GetMapping(value = "findAllSeatDetailByCondition")
 //    public ResponseEntity<SeatDetailDto> getFilmById(@RequestBody SeatDetailDto seatDetailDto) {
@@ -71,9 +77,12 @@ public class FilmController {
 //        System.out.println(name);
 //        System.out.println(date_show);
 //        System.out.println(time_id);
+        System.out.println(seatDetailService.getIdSeatDetailByBookingCondition(name,
+                date_show, time_id));
         return ResponseEntity.ok(seatDetailService.getIdSeatDetailByBookingCondition(name,
                 date_show, time_id));
     }
+
 
 //    //    TuHC - danh sach phim dang chieu
 //    @GetMapping(value = "/movie-showing")
