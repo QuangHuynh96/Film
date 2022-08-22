@@ -11,8 +11,17 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
+
+
     @Override
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+    public List<Category> findAllCategory() {
+        return categoryRepository.findAllCategory();
     }
+
+    @Override
+    public Category findById(Long id) {
+        return categoryRepository.findCategoryById(id);
+    }
+
+
 }
