@@ -4,6 +4,8 @@ import com.example.a09cinema_backenddevelop.DTO.StatisticFilm;
 import com.example.a09cinema_backenddevelop.repository.FilmStatsticRepository;
 import com.example.a09cinema_backenddevelop.service.FilmStatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,13 +23,23 @@ public class FilmStatisticServiceImpl implements FilmStatisticService {
     }
 
     @Override
-    public String countNameFilm() {
-        return filmStatsticRepository.countNameFilm();
+    public Page<StatisticFilm> findAllAndPage(Pageable pageable) {
+        return filmStatsticRepository.findAllAndPage(pageable);
     }
 
     @Override
-    public String countTicket() {
-        return filmStatsticRepository.countTicket();
+    public List<StatisticFilm> limitFiveNameFilm() {
+        return filmStatsticRepository.limitFiveNameFilm();
     }
+
+//    @Override
+//    public String countNameFilm() {
+//        return filmStatsticRepository.countNameFilm();
+//    }
+//
+//    @Override
+//    public String countTicket() {
+//        return filmStatsticRepository.countTicket();
+//    }
 
 }

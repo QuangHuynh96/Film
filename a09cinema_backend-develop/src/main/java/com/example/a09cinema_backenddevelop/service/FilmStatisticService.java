@@ -1,6 +1,8 @@
 package com.example.a09cinema_backenddevelop.service;
 
 import com.example.a09cinema_backenddevelop.DTO.StatisticFilm;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -8,8 +10,12 @@ public interface FilmStatisticService {
 
     List<StatisticFilm> statisticalByCurrentDay();
 
-    String countNameFilm();
+    Page<StatisticFilm> findAllAndPage(Pageable pageable);
 
-    String countTicket();
+    List<StatisticFilm>limitFiveNameFilm();
+
+    //    String countNameFilm();
+//
+//    String countTicket();
 
 }

@@ -2,9 +2,12 @@ package com.example.a09cinema_backenddevelop.controller;
 
 
 
-import com.example.a09cinema_backenddevelop.DTO.StatisticAccount;
+import com.example.a09cinema_backenddevelop.DTO.StatisticAccount;;
 import com.example.a09cinema_backenddevelop.service.AccountStatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,10 +36,17 @@ public class AccountStatisticController {
         return new ResponseEntity<List<StatisticAccount>>(statisticAccount, HttpStatus.OK);
     }
 
-//    public ResponseEntity accouncStatistic() {
-//        List<StatisticAccount> statisticAccounts = this.accountStatisticService.statisticalByAccountDay();
-//        return statisticAccounts.isEmpty() ?
-//                new ResponseEntity(HttpStatus.NO_CONTENT) :
-//                new ResponseEntity(statisticAccounts, HttpStatus.OK);
-//    }
+    @GetMapping("/accountStatisticPage")
+    public ResponseEntity<Page<StatisticAccount>> filmStatisticPage(@PageableDefault(size = 5) Pageable pageable)  {
+
+        Page<StatisticAccount> StatisticAccounts = accountStatisticService.findAllAndPage(pageable);
+        return new ResponseEntity<>(StatisticAccounts, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/limitFiveNameAccount")
+    public ResponseEntity<List<StatisticAccount>> limitFiveNameAccount()  {
+        List<StatisticAccount> limitFiveAccount= accountStatisticService.limitFiveNameAccount();
+        return new ResponseEntity<>(limitFiveAccount, HttpStatus.OK);
+    }
 }
