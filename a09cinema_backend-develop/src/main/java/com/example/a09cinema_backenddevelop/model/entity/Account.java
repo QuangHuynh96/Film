@@ -1,5 +1,6 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import com.example.a09cinema_backenddevelop.validation.DateFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
@@ -8,8 +9,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.lang.annotation.Annotation;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -17,20 +21,31 @@ import java.util.Set;
 @Entity
 @Data
 //@JsonIdentityInfo(generator= JSOGGenerator.class)
-public class Account {
+public class Account  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Boolean isEnabled;
+    @NotBlank
     private String username;
     private String accountCode;
+    @NotEmpty
     private String password;
+    @NotEmpty
+    @Length(max = 100)
     private String fullname;
+    @DateFormat
     private LocalDate birthday;
+    @NotEmpty
+    @Pattern(message = "Vui lòng nhập số",regexp = "^\\d{9,12}$")
     private String idCard;
     private String address;
+    @NotEmpty
+    @Pattern(message = "Số điện thoại có 10 số", regexp = "((09|03|07|08|05)([0-9]{8})\\b)")
     private String phone;
     private String verificationCode;
+    @NotEmpty
+    @Email
     private String email;
     private String gender;
     private int totalPoint;
