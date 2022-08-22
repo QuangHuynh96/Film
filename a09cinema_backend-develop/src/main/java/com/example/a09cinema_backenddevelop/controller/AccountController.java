@@ -1,7 +1,6 @@
 package com.example.a09cinema_backenddevelop.controller;
 
 import com.example.a09cinema_backenddevelop.model.entity.Account;
-import com.example.a09cinema_backenddevelop.payload.response.ResponseMessage;
 import com.example.a09cinema_backenddevelop.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,18 +62,23 @@ public class AccountController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Account> addAccount(@Valid @RequestBody Account account, BindingResult bindingResult){
-       if (bindingResult.hasFieldErrors()){
-          return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-       }
-        if (accountService.existsByEmail(account.getEmail())){
+    public ResponseEntity<Account> addAccount(@Valid @RequestBody Account account, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+        if (accountService.existsByEmail(account.getEmail())) {
             System.out.println("Email đã được đăng kí");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 //            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        String passWord=account.getPassword();
+        if (accountService.existsByUsername(account.getUsername())){
+            System.out.println("Username đã đăng kí");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        }
+        String passWord = account.getPassword();
         account.setPassword(passwordEncoder.encode(passWord));
-        Account newAccount=accountService.saveAccount(account);
+        Account newAccount = accountService.saveAccount(account);
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 }
