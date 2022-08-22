@@ -20,7 +20,7 @@ public class ManagerBookingController {
     @Autowired
     private ManagerBookingService service;
     @GetMapping("/list")
-    public ResponseEntity<Page<SelectAllBookingDto>> getAllBooking(@RequestParam(defaultValue = "") String key, @PageableDefault(size =2) Pageable pageable){
+    public ResponseEntity<Page<SelectAllBookingDto>> getAllBooking(@RequestParam(defaultValue = "") String key, @PageableDefault(size =5) Pageable pageable){
         Page<SelectAllBookingDto>bookings=service.findAll(key, pageable);
         if (bookings.isEmpty()){
             return new ResponseEntity<>(bookings,HttpStatus.OK);
