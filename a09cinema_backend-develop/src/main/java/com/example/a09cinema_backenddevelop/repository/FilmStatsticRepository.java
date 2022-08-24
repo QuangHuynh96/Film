@@ -41,18 +41,15 @@ public interface FilmStatsticRepository extends JpaRepository<SeatDetail, Long> 
                     "            group by film.name order by money DESC) abc ")
     Page<StatisticFilm> findAllAndPage(Pageable pageable);
 
-    @Query(value = "select film.name, count(seat_detail.film_id) as numbersTicket, sum(booking.total_price) as money from film inner join seat_detail " +
+    @Query(value = "select film.name , count(seat_detail.film_id) as numbersTicket , sum(booking.total_price) money " +
+            "from film " +
+            "inner join seat_detail " +
             "on film.id = seat_detail.film_id " +
             "inner join booking  " +
             "on seat_detail.booking_id = booking.id " +
-            "where booking.day_time_booking = CURDATE() " +
-            "group by film.name order by money DESC LIMIT 5", nativeQuery = true)
-    List<StatisticFilm>limitFiveNameFilm();
+            "where booking.day_time_booking = CURDATE() ", nativeQuery = true)
+    List<StatisticFilm> findAllStatisticFilm();
 
-//    @Query(value="select count(film.id) amount_film from film; ", nativeQuery= true)
-//    String countNameFilm();
-//
-//    @Query(value="select count(booking.id) amount_ticket from booking; ", nativeQuery= true)
-//    String countTicket();
+
 
 }

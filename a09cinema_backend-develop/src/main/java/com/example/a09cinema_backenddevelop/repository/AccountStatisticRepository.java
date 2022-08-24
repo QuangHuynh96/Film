@@ -27,10 +27,9 @@ public interface AccountStatisticRepository extends JpaRepository<Account, Long>
                     "           where b.day_time_booking = curdate() group by b.booking_code order by money DESC) abc ")
     Page<StatisticAccount> findAllAndPageAccount(Pageable pageable);
 
-    @Query(value = "select a.fullname, a.account_code, count(b.booking_code) numberTicket, sum(b.total_price) money, sum(a.total_point) point\n" +
-            "            from account as a join booking as b on a.id = b.account_id" +
-            "            where b.day_time_booking = curdate() group by b.booking_code " +
-            "            order by money DESC Limit 5", nativeQuery = true)
-    List<StatisticAccount> limitFiveNameAccount();
+    @Query(value = "select sum(b.total_price) money" +
+            "            from booking as b" +
+            "            where b.day_time_booking = curdate();", nativeQuery = true)
+    List<StatisticAccount> findAllStatisticAccount();
 
 }

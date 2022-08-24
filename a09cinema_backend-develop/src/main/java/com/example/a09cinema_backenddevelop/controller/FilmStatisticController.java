@@ -44,22 +44,14 @@ public class FilmStatisticController {
             return new ResponseEntity<>(StatisticFilms, HttpStatus.OK);
     }
 
-    @GetMapping("/limitFiveNameFilm")
-    public ResponseEntity<List<StatisticFilm>> limitFiveNameFilm()  {
-        List<StatisticFilm> limitFiveFilm= filmStatisticService.limitFiveNameFilm();
-        return new ResponseEntity<>(limitFiveFilm, HttpStatus.OK);
-    }
 
-//
-//    @GetMapping("/countNameFilm")
-//    public ResponseEntity countNameFilm() {
-//        String countNameFilm= String.valueOf(filmStatisticService.countNameFilm());
-//        return new ResponseEntity(countNameFilm, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/countTicket")
-//    public ResponseEntity countTicket() {
-//        double countTicket= Double.parseDouble(filmStatisticService.countTicket());
-//        return new ResponseEntity(countTicket, HttpStatus.OK);
-//    }
+    @GetMapping("/totalPrice")
+    public ResponseEntity<Integer> getTotalPrice() {
+        List<StatisticFilm> list = filmStatsticRepository.findAllStatisticFilm();
+        int sum = 0;
+        for(StatisticFilm statisticFilm : list) {
+            sum += statisticFilm.getMoney();
+        }
+        return new ResponseEntity<>(sum, HttpStatus.OK);
+    }
 }

@@ -12,10 +12,8 @@ public interface FilmStatisticService {
 
     Page<StatisticFilm> findAllAndPage(Pageable pageable);
 
-    List<StatisticFilm>limitFiveNameFilm();
+    List<StatisticFilm> findAllStatisticFilm();
 
-    //    String countNameFilm();
-//
-//    String countTicket();
+
 
 }

@@ -44,9 +44,15 @@ public class AccountStatisticController {
 
     }
 
-    @GetMapping("/limitFiveNameAccount")
-    public ResponseEntity<List<StatisticAccount>> limitFiveNameAccount()  {
-        List<StatisticAccount> limitFiveAccount= accountStatisticService.limitFiveNameAccount();
-        return new ResponseEntity<>(limitFiveAccount, HttpStatus.OK);
+    @GetMapping("/totalPriceAccount")
+    public ResponseEntity<Integer> getTotalPrice() {
+        List<StatisticAccount> list = accountStatisticService.findAllStatisticAccount();
+        int sum = 0;
+        for(StatisticAccount statisticAccount : list) {
+            sum += statisticAccount.getMoney();
+        }
+        return new ResponseEntity<>(sum, HttpStatus.OK);
     }
+
+
 }

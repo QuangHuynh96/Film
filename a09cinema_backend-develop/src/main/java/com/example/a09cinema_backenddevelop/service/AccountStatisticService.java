@@ -12,5 +12,6 @@ public interface AccountStatisticService {
 
     Page<StatisticAccount> findAllAndPage(Pageable pageable);
 
-    List<StatisticAccount>limitFiveNameAccount();
+    List<StatisticAccount> findAllStatisticAccount();
+
 }

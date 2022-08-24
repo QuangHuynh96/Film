@@ -27,7 +27,8 @@ public class AccountStatisticServiceImpl implements AccountStatisticService {
     }
 
     @Override
-    public List<StatisticAccount> limitFiveNameAccount() {
-        return accountStatisticRepository.limitFiveNameAccount();
+    public List<StatisticAccount> findAllStatisticAccount() {
+        return accountStatisticRepository.findAllStatisticAccount();
     }
+
 }

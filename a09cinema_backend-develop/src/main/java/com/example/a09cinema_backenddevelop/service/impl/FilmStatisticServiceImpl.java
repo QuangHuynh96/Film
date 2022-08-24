@@ -28,18 +28,9 @@ public class FilmStatisticServiceImpl implements FilmStatisticService {
     }
 
     @Override
-    public List<StatisticFilm> limitFiveNameFilm() {
-        return filmStatsticRepository.limitFiveNameFilm();
+    public List<StatisticFilm> findAllStatisticFilm() {
+        return filmStatsticRepository.findAllStatisticFilm();
     }
 
-//    @Override
-//    public String countNameFilm() {
-//        return filmStatsticRepository.countNameFilm();
-//    }
-//
-//    @Override
-//    public String countTicket() {
-//        return filmStatsticRepository.countTicket();
-//    }
 
 }
