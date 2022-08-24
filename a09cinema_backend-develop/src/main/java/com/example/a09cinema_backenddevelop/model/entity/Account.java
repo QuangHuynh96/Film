@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+//import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
+import org.springframework.boot.jackson.JsonObjectSerializer;
 
 import javax.persistence.*;
 import java.time.LocalDate;

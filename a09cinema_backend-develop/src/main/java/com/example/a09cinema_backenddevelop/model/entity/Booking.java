@@ -3,6 +3,7 @@ package com.example.a09cinema_backenddevelop.model.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+//import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -26,6 +26,7 @@ public class Booking {
     private int pointExchange;
     private int pointReward;
     private String bookingCode;
+    private Boolean isDeleted;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;
@@ -33,9 +34,8 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
-
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    private List<SeatDetail> seatDetails;
 
 //    @OneToOne(mappedBy = "booking")
 //    private History history;
