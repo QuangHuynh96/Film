@@ -2,6 +2,7 @@ package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator= JSOGGenerator.class)
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,7 @@ public class Seat {
     private String name;
     private double price;
 
+    @JsonManagedReference("seat_detail")
     @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetail;
 

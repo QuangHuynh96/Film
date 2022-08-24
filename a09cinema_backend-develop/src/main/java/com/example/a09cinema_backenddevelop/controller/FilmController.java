@@ -21,7 +21,7 @@ import java.util.Optional;
 public class FilmController {
     @Autowired
     private FilmService filmService;
-@GetMapping("/search")
+    @GetMapping("/search")
 public ResponseEntity<Page<Film>> search(String value,Pageable pageable) {
     Page<Film> films = filmService.search(value, pageable);
     if(films.isEmpty()) {
@@ -29,7 +29,7 @@ public ResponseEntity<Page<Film>> search(String value,Pageable pageable) {
     }
     return new ResponseEntity<>(films, HttpStatus.OK);
 }
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<Page<Film>> findFilmWithPage(Pageable pageable) {
         Page<Film> films = filmService.findAll(pageable);
         if(films.isEmpty()) {
@@ -37,12 +37,12 @@ public ResponseEntity<Page<Film>> search(String value,Pageable pageable) {
         }
         return new ResponseEntity<>(films, HttpStatus.OK);
     }
-    @GetMapping("/date")
-    public ResponseEntity<Page<Film>> findSortWithPage(Pageable pageable) {
-        Page<Film> films = filmService.findAll(pageable);
-        if(films.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(films, HttpStatus.OK);
-    }
+//    @GetMapping("/date")
+//    public ResponseEntity<Page<Film>> findSortWithPage(Pageable pageable){
+//        Page<Film> films = filmService.findSort(pageable);
+//        if(films.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(films,HttpStatus.OK);
+//    }
 }

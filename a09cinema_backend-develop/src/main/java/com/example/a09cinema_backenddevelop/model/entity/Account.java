@@ -15,7 +15,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator= JSOGGenerator.class)
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

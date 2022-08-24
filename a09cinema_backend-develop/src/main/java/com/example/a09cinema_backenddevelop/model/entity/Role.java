@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 @Entity
 @Data
-@JsonIdentityInfo(generator= JSOGGenerator.class)
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Role {
 //AnhLT
     public static final String ROLE_USER = "ROLE_USER";

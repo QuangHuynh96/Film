@@ -1,6 +1,7 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-@JsonIdentityInfo(generator= JSOGGenerator.class)
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +18,7 @@ public class Room {
     private String name;
     private int size;
     private boolean status;
-
+@JsonManagedReference
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetail;
 }
