@@ -20,12 +20,12 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     Page<Account> getAllEmployee(Pageable pageable);
     @Query(
             value = "select * from account inner join account_role on account.id= account_role.account_id " +
-                    "where account.deleted=0 and account_role.role_id=2 and (account.id like concat('%',:search) " +
+                    "where account.deleted=0 and account_role.role_id=2 and (account.id like concat(:search,'%') " +
                     "or account.fullname like concat('%',:search,'%') or account.id_card like concat(:search,'%') " +
                     "or account.email like concat(:search,'%') or account.phone like concat(:search,'%') " +
                     "or account.address like concat('%',:search,'%'))",
             countQuery = "select COUNT(*) from account inner join account_role on account.id= account_role.account_id " +
-                    "where account.deleted=0 and account_role.role_id=2 and(account.id like concat('%',:search) " +
+                    "where account.deleted=0 and account_role.role_id=2 and(account.id like concat(:search,'%') " +
                     "or account.fullname like concat('%',:search,'%') or account.id_card like concat(:search,'%')  " +
                     "or account.email like concat(:search,'%') or account.phone like concat(:search,'%') " +
                     "or account.address like concat('%',:search,'%'))"

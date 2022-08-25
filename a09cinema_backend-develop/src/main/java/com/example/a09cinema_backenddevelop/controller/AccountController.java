@@ -28,11 +28,6 @@ public class AccountController {
         return accountService.listEmployee(pageable);
 
     }
-    @GetMapping("/employee/{id}")
-    public Optional<Account> getEmployeeById(@PathVariable(value = "id") Long id) {
-        return accountService.findEmployeeById(id);
-    }
-
     @DeleteMapping(value = "employee/delete/{id}")
     public ResponseEntity<Account> deleteByEmployeeId(@PathVariable Long id) {
         accountService.deleteEmployeeAccountById(id);

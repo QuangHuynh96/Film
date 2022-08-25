@@ -12,5 +12,4 @@ public interface AccountService {
     Page<Account> searchEmployee(Pageable pageable, String s);
     void deleteEmployeeAccountById(Long id);
 
-    Optional<Account> findEmployeeById(Long id);
 }

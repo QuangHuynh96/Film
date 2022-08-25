@@ -30,17 +30,6 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.deleteEmployeeAccountById(id);
     }
 
-    @Override
-    public Optional<Account> findEmployeeById(Long id) {
-        return accountRepository.findById(id);
-    }
-
-    @Override
-    public Account save(Optional<Account>  account) {
-        Account account1= account.get();
-        accountRepository.save(account1);
-        return account1;
-    }
 
 
 }
