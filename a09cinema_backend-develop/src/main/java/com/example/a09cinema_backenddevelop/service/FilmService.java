@@ -7,5 +7,5 @@ import org.springframework.data.domain.Pageable;
 public interface FilmService {
     Page<Film> search(String value, Pageable pageable);
     Page<Film> findAll(Pageable pageable);
-//    Page<Film> findSort(Pageable pageable);
+    Page<Film> findSort(Pageable pageable);
 }
