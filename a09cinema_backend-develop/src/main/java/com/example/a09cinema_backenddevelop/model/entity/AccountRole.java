@@ -2,6 +2,7 @@ package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import javax.persistence.*;
@@ -23,19 +24,5 @@ public class AccountRole {
     @JsonBackReference("account-role")
     private Account account;
 
-    public Role getRole() {
-        return role;
-    }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

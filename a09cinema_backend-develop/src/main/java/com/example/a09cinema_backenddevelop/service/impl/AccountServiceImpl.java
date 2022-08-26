@@ -4,11 +4,17 @@ import com.example.a09cinema_backenddevelop.model.entity.Account;
 import com.example.a09cinema_backenddevelop.repository.AccountRepository;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import com.example.a09cinema_backenddevelop.service.AccountService;
+import  com.example.a09cinema_backenddevelop.service.AccountService;
+
+import java.util.List;
+import java.util.Optional;
+
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -23,7 +29,23 @@ public class AccountServiceImpl implements AccountService {
     JavaMailSender javaMailSender;
 
     @Override
-    public Account findById(Long id) {
+    public Page<Account> getAllAccount(String username,
+                                       Pageable pageable) {
+        return accountRepository.findAll(username, pageable);
+    }
+
+    @Override
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    @Override
+    public Account save(Account account) {
+        return accountRepository.save(account);
+    }
+
+    @Override
+    public Account findById(long id) {
         return accountRepository.findById(id).orElse(null);
     }
 
@@ -31,35 +53,6 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void updatePassword(Long id, String newPassword) {
         accountRepository.updatePassword(id, newPassword);
-    }
-
-    @Override
-    public void updateInfo(Account ac) {
-        accountRepository.updateInfo(ac.getId(), ac.getFullname(), ac.getBirthday(),
-                ac.getGender(), ac.getEmail(), ac.getIdCard(), ac.getPhone(), ac.getAddress());
-    }
-    @Override
-    public Account findByUsername(String username) {
-        return accountRepository.findByUsername(username);
-    }
-
-    @Override
-    public Boolean existsByUsername(String username) {
-        return accountRepository.existsByUsername(username);
-    }
-
-    @Override
-    public Boolean existsByEmail(String email) {
-        return accountRepository.existsByEmail(email);
-    }
-
-    @Override
-    public Account save(Account account) {
-        return accountRepository.save(account);
-    }
-    @Override
-    public Account saveAccount(Account account) {
-        return accountRepository.save(account);
     }
 
     @Override
@@ -104,5 +97,31 @@ public class AccountServiceImpl implements AccountService {
                 "<p>NHÓM DỰ ÁN</p>";
         helper.setText(mailContent, true);
         javaMailSender.send(message);
+    }
+
+    @Override
+    public void updateInfo(Account ac) {
+        accountRepository.updateInfo(ac.getId(), ac.getFullname(), ac.getBirthday(),
+                ac.getGender(), ac.getEmail(), ac.getIdCard(), ac.getPhone(), ac.getAddress());
+    }
+
+    @Override
+    public Account findByUsername(String username) {
+        return accountRepository.findByUsername(username);
+    }
+
+    @Override
+    public Boolean existsByUsername(String username) {
+        return accountRepository.existsByUsername(username);
+    }
+
+    @Override
+    public Boolean existsByEmail(String email) {
+        return accountRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Account saveAccount(Account account) {
+        return accountRepository.save(account);
     }
 }

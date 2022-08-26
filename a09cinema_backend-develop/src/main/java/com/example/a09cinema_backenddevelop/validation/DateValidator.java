@@ -23,7 +23,7 @@ public class DateValidator implements ConstraintValidator<DateFormat, LocalDate>
         LocalDate before12Years = now.minusYears(12);
         LocalDate after80Years = now.minusYears(80);
         if (birthDay.isBefore(before12Years) && birthDay.isAfter(after80Years)) {
-             isRetry=true;
+            isRetry=true;
         }
         return isRetry;
     }

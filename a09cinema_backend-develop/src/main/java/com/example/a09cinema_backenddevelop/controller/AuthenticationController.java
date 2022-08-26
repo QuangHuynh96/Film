@@ -1,7 +1,6 @@
 package com.example.a09cinema_backenddevelop.controller;
 
 import com.example.a09cinema_backenddevelop.model.entity.Account;
-import com.example.a09cinema_backenddevelop.model.entity.Role;
 import com.example.a09cinema_backenddevelop.payload.request.ResetPassRequest;
 import com.example.a09cinema_backenddevelop.payload.request.SignInForm;
 import com.example.a09cinema_backenddevelop.payload.request.SignUpForm;
@@ -20,13 +19,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
-import java.util.HashSet;
-import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
@@ -86,4 +84,26 @@ public class AuthenticationController {
         );
         return ResponseEntity.ok(new ResponseMessage("success"));
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<Account> addAccount(@Valid @RequestBody Account account, BindingResult bindingResult) {
+        System.out.println(account.getEmail());
+        if (bindingResult.hasFieldErrors()) {
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+        if (accountService.existsByEmail(account.getEmail())) {
+            System.out.println("Email đã được đăng kí");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        if (accountService.existsByUsername(account.getUsername())){
+            System.out.println("Username đã đăng kí");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        String passWord = account.getPassword();
+        account.setPassword(passwordEncoder.encode(passWord));
+        Account newAccount = accountService.saveAccount(account);
+        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
+    }
+
 }

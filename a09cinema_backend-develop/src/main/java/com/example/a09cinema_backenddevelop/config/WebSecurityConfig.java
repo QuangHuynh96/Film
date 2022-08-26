@@ -16,19 +16,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.servlet.Filter;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
+
     @Autowired
     JwtEntryPoint jwtEntryPoint;
 
-    @Bean
-    public JwtTokenFilter jwtTokenFilter(){
-        return new JwtTokenFilter();
-    }
+    @Autowired
+    JwtTokenFilter filter;
+
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -51,17 +53,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable()
-                .authorizeRequests().antMatchers("/api/**").permitAll();
-//        http.cors().and().csrf().disable()
-//                // dont authenticate this particular request
-//                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-//                // all other requests need to be authenticated
-//                .anyRequest().authenticated().and()
-//
-//                // make sure we use stateless session; session won't be used to store user's state.
-//                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and().sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        // Add a filter to validate the tokens with every request
-//        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                // all other requests need to be authenticated
+                .anyRequest().authenticated().and()
+
+                // make sure we use stateless session; session won't be used to store user's state.
+                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // Add a filter to validate the tokens with every request
+        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }
+
 }

@@ -2,6 +2,7 @@ package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
@@ -9,10 +10,10 @@ import javax.persistence.*;
 import java.util.List;
 @Entity
 @Data
-//@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Role {
-//AnhLT
-    public static final String ROLE_USER = "ROLE_USER";
+
+ public static final String ROLE_USER = "ROLE_USER";
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_MODERATOR = "ROLE_MODERATOR";
     @Override
@@ -79,4 +80,5 @@ public class Role {
     public void setAccountRoles(List<AccountRole> accountRoles) {
         this.accountRoles = accountRoles;
     }
+
 }

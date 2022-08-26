@@ -1,7 +1,6 @@
 package com.example.a09cinema_backenddevelop.security.accountprincal;
 
 import com.example.a09cinema_backenddevelop.model.entity.Account;
-import com.example.a09cinema_backenddevelop.model.entity.AccountRole;
 import com.example.a09cinema_backenddevelop.model.entity.Booking;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
