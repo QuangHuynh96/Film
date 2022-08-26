@@ -1,12 +1,8 @@
 package com.example.a09cinema_backenddevelop.model.entity;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-import lombok.Data;
-//import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import javax.persistence.*;
 @Entity
-@Data
 @JsonIdentityInfo(generator= JSOGGenerator.class)
 public class AccountRole {
     @Id
@@ -21,5 +17,30 @@ public class AccountRole {
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 
+    public AccountRole() {
+    }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

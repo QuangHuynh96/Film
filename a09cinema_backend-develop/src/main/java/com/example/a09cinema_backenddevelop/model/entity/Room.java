@@ -20,4 +20,47 @@ public class Room {
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetail;
+
+    public Room() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public List<SeatDetail> getSeatDetail() {
+        return seatDetail;
+    }
+
+    public void setSeatDetail(List<SeatDetail> seatDetail) {
+        this.seatDetail = seatDetail;
+    }
 }
