@@ -4,12 +4,37 @@ import com.example.a09cinema_backenddevelop.model.entity.Account;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
+import java.util.List;
 
+
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 
 public interface AccountService {
     Page<Account> listEmployee(Pageable pageable);
     Page<Account> searchEmployee(Pageable pageable, String s);
     void deleteEmployeeAccountById(Long id);
 
+
+
+    Page<Account> getAllAccount(String username,
+                                Pageable pageable);
+
+    List<Account> findAll();
+
+//    Page<Account> searchByName(String username, Pageable pageable);
+
+    Account findById(long id);
+//    Account findById(Long id);
+
+    void updatePassword(Long id, String newPassword);
+    void updateInfo(Account account);
+    Account findByUsername(String  username);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
+    Account save(Account account);
+    Account saveAccount(Account account);
+    void addVerificationCode(String username) throws MessagingException, UnsupportedEncodingException;
+    Boolean findAccountByVerificationCodeToResetPassword(String code);
+    void saveNewPassword(String password,String code);
 }

@@ -13,8 +13,8 @@ import java.util.List;
 @Data
 @JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Role {
-//AnhLT
-    public static final String ROLE_USER = "ROLE_USER";
+
+ public static final String ROLE_USER = "ROLE_USER";
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_MODERATOR = "ROLE_MODERATOR";
     @Override
@@ -68,6 +68,11 @@ public class Role {
     @JsonManagedReference("role_accounts")
     private List<AccountRole> accountRoles;
 
+
+
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
+    }
 
 
 }

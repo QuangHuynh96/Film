@@ -2,7 +2,9 @@ package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
@@ -24,4 +26,5 @@ public class AccountRole {
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     @JsonBackReference("acc_roles")
     private Account account;
+
 }
