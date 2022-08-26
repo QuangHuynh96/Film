@@ -1,6 +1,5 @@
 package com.example.a09cinema_backenddevelop.security.jwt;
 
-import com.example.a09cinema_backenddevelop.security.accountprincal.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
+@Component
 public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     JwtProvider jwtProvider;
@@ -37,7 +36,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String token = getJwtFromRequest(request);
-            if(token!=null&&jwtProvider.validateToken(token)){
+            if(jwtProvider.validateToken(token)) System.out.println("Token hopwj keej");
+            else System.out.println("errror token");
+            if(token!=null && jwtProvider.validateToken(token)){
                 String username = jwtProvider.getUserNameFromToken(token);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
