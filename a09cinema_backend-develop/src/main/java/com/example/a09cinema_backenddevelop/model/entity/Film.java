@@ -3,6 +3,7 @@ package com.example.a09cinema_backenddevelop.model.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
@@ -26,15 +27,15 @@ public class Film {
     private String trailer;
     private String studioName;
 
-
+    @JsonManagedReference("film_imgs")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
 //    @JsonIgnore
 //    @JsonBackReference
     private List<FilmImg> filmImgs;
-
+    @JsonManagedReference("seat_detail")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetails;
-
+    @JsonManagedReference("category_films")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<CategoryFilm> categoryFilms;
 

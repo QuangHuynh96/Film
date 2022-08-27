@@ -22,7 +22,7 @@ public interface SeatDetailRepository extends JpaRepository<SeatDetail,Long> {
 
 
     // lấy ra thông tin ghế có id
-    @Query(nativeQuery = true,value = "select * from seat_detail where seat_detail.id=?1")
+    @Query(nativeQuery = true, value = "select * from seat_detail where seat_detail.id=?1")
     SeatDetail getInfoSeatDetailById(long id);
 
     // lấy ra danh sách ghế phù hợp với phim đã chọn để chọn ghế

@@ -60,8 +60,9 @@ public class FilmController {
     @GetMapping(value = "getAllSeatDetailByIdSeat/{id}")
     public ResponseEntity<List<SeatDetail>> getAllSeatDetailByIdSeat(@PathVariable(value = "id") long id) {
         SeatDetail tmp = seatDetailService.getInfoSeatDetailById(id);
+        System.out.println(tmp.getRoom().getId());
         System.out.println(seatDetailService.getAllSeatDetailByIdToChoose(tmp.getDateShow(),tmp.getFilm().getId(),tmp.getRoom().getId(),tmp.getTime().getId()));
-        return ResponseEntity.ok(seatDetailService.getAllSeatDetailByIdToChoose(tmp.getDateShow(),tmp.getFilm().getId(),tmp.getRoom().getId(),tmp.getTime().getId()));
+        return new ResponseEntity<>(seatDetailService.getAllSeatDetailByIdToChoose(tmp.getDateShow(),tmp.getFilm().getId(),tmp.getRoom().getId(),tmp.getTime().getId()), HttpStatus.OK);
     }
     ///{name}/{dateShow}/{time_id}
 //    @GetMapping(value = "findAllSeatDetailByCondition")
@@ -74,79 +75,10 @@ public class FilmController {
     public ResponseEntity<SeatDetailDto> getFilmById(@RequestParam(value = "name") String name,
                                                      @RequestParam(value = "date_show") String date_show,
                                                      @RequestParam(value = "time_id") long time_id) {
-//        System.out.println(name);
-//        System.out.println(date_show);
-//        System.out.println(time_id);
         System.out.println(seatDetailService.getIdSeatDetailByBookingCondition(name,
                 date_show, time_id));
         return ResponseEntity.ok(seatDetailService.getIdSeatDetailByBookingCondition(name,
                 date_show, time_id));
     }
 
-
-//    //    TuHC - danh sach phim dang chieu
-//    @GetMapping(value = "/movie-showing")
-//    public ResponseEntity<List<Movie>> getMovieShowings() {
-//        List<Movie> movieShowings = movieService.findAllMovieShowing(today);
-//        if (movieShowings.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } else {
-//            return new ResponseEntity<>(movieShowings, HttpStatus.OK);
-//        }
-//    }
-//
-//    //    TuHC - phim sap chieu
-//    @GetMapping(value = "/movie-coming")
-//    public ResponseEntity<List<Movie>> getMovieComingSoon() {
-//        List<Movie> movieComingSoons = movieService.findAllMovieComingSoon(today);
-//        if (movieComingSoons.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } else {
-//            return new ResponseEntity<>(movieComingSoons, HttpStatus.OK);
-//        }
-//    }
-//
-//    //    TuHC - phim top 5
-//    @GetMapping(value = "/movie-top5")
-//    public ResponseEntity<List<Movie>> getMovieTopFive() {
-//        List<Movie> movieTopFives = movieService.listTopFiveMovie();
-//        if (movieTopFives.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } else {
-//            return new ResponseEntity<>(movieTopFives, HttpStatus.OK);
-//        }
-//    }
-//
-//    //    TuHC - chi tiet phim
-//    @GetMapping(value = "/detail-movie/{id}")
-//    public ResponseEntity<Movie> getMovieById(@PathVariable("id") long id) {
-//        Movie movie = movieService.findMovieById(id);
-//        if (movie != null) {
-//            return new ResponseEntity<>(movie, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//    }
-//
-//    //    TuHC - tim kiem phim
-//    @GetMapping(value = "/search-movie")
-//    public ResponseEntity<List<Movie>> searchMovie(@RequestParam("keyword") String keyword) {
-//        List<Movie> movies = movieService.searchMovie(keyword, today);
-//        if (movies.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } else {
-//            return new ResponseEntity<>(movies, HttpStatus.OK);
-//        }
-//    }
-//
-//    //    TuHC - lay phim dang chieu va sap chieu
-//    @GetMapping(value = "/all-movie")
-//    public ResponseEntity<List<Movie>> findAllMovieShowingAndComingSoon() {
-//        List<Movie> movies = movieService.findAllMovieShowingAndComingSoon();
-//        if (movies.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } else {
-//            return new ResponseEntity<>(movies, HttpStatus.OK);
-//        }
-//    }
 }

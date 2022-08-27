@@ -1,8 +1,10 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -29,11 +31,11 @@ public class Booking {
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
-
+    @JsonManagedReference("seat_details")
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetails;
 
