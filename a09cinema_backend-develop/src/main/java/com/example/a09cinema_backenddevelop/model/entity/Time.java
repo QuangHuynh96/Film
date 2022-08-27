@@ -22,5 +22,30 @@ public class Time {
 
     private String timeShow;
 
+    public Time() {
+    }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<SeatDetail> getSeatDetail() {
+        return seatDetail;
+    }
+
+    public void setSeatDetail(List<SeatDetail> seatDetail) {
+        this.seatDetail = seatDetail;
+    }
+
+    public String getTimeShow() {
+        return timeShow;
+    }
+
+    public void setTimeShow(String timeShow) {
+        this.timeShow = timeShow;
+    }
 }

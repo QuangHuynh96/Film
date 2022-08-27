@@ -4,7 +4,6 @@ import com.example.a09cinema_backenddevelop.model.dto.SeatDetailDto;
 import com.example.a09cinema_backenddevelop.model.dto.TimeDto;
 import com.example.a09cinema_backenddevelop.model.entity.Film;
 import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
-import com.example.a09cinema_backenddevelop.model.entity.Time;
 import com.example.a09cinema_backenddevelop.service.FilmService;
 import com.example.a09cinema_backenddevelop.service.SeatDetailService;
 import com.example.a09cinema_backenddevelop.service.TimeService;
@@ -20,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/film/")
 @CrossOrigin("*")
+
 public class FilmController {
     private LocalDate today = LocalDate.now();
 

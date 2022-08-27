@@ -23,4 +23,30 @@ public class CategoryFilm {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
+    public CategoryFilm() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

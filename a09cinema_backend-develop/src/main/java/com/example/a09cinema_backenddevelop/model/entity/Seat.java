@@ -27,5 +27,46 @@ public class Seat {
     @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetail;
 
+    public Seat() {
+    }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean isVip() {
+        return vip;
+    }
+
+    public void setVip(boolean vip) {
+        this.vip = vip;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public List<SeatDetail> getSeatDetail() {
+        return seatDetail;
+    }
+
+    public void setSeatDetail(List<SeatDetail> seatDetail) {
+        this.seatDetail = seatDetail;
+    }
 }

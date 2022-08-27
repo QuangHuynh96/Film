@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 @Repository
 public interface TimeRepository extends JpaRepository<Time,Long> {
     @Query(nativeQuery = true, value = " SELECT `time`.id as time_id,`time`.time_show FROM a0921i1_cinema.time \n " +

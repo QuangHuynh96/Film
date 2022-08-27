@@ -1,9 +1,9 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
@@ -13,6 +13,7 @@ import java.util.List;
 
 @Data
 @Entity
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +30,6 @@ public class Film {
 
     @JsonManagedReference("film_imgs")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    @JsonBackReference
     private List<FilmImg> filmImgs;
     @JsonManagedReference("seat_detail")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
@@ -39,5 +38,102 @@ public class Film {
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<CategoryFilm> categoryFilms;
 
+    public Film() {
+    }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getActor() {
+        return actor;
+    }
+
+    public void setActor(String actor) {
+        this.actor = actor;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
+    }
+
+    public String getStudioName() {
+        return studioName;
+    }
+
+    public void setStudioName(String studioName) {
+        this.studioName = studioName;
+    }
+
+    public List<FilmImg> getFilmImgs() {
+        return filmImgs;
+    }
+
+    public void setFilmImgs(List<FilmImg> filmImgs) {
+        this.filmImgs = filmImgs;
+    }
+
+    public List<SeatDetail> getSeatDetails() {
+        return seatDetails;
+    }
+
+    public void setSeatDetails(List<SeatDetail> seatDetails) {
+        this.seatDetails = seatDetails;
+    }
+
+    public List<CategoryFilm> getCategoryFilms() {
+        return categoryFilms;
+    }
+
+    public void setCategoryFilms(List<CategoryFilm> categoryFilms) {
+        this.categoryFilms = categoryFilms;
+    }
 }

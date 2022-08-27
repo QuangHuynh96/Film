@@ -1,7 +1,7 @@
 package com.example.a09cinema_backenddevelop.service.impl;
 
+
 import com.example.a09cinema_backenddevelop.model.dto.TimeDto;
-import com.example.a09cinema_backenddevelop.model.entity.Time;
 import com.example.a09cinema_backenddevelop.repository.TimeRepository;
 import com.example.a09cinema_backenddevelop.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;

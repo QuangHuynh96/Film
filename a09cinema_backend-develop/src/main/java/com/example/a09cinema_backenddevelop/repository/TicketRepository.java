@@ -1,4 +1,4 @@
 package com.example.a09cinema_backenddevelop.repository;
 
-public interface CategoryRepository {
+public interface TicketRepository {
 }

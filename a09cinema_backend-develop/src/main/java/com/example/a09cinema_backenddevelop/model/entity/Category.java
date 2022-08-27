@@ -8,7 +8,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Category {
@@ -20,4 +19,30 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<CategoryFilm> categoryFilms;
 
+    public Category() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNameCategory() {
+        return nameCategory;
+    }
+
+    public void setNameCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
+    }
+
+    public List<CategoryFilm> getCategoryFilms() {
+        return categoryFilms;
+    }
+
+    public void setCategoryFilms(List<CategoryFilm> categoryFilms) {
+        this.categoryFilms = categoryFilms;
+    }
 }

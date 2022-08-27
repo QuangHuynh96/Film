@@ -14,6 +14,7 @@ import java.util.List;
 public class SeatDetailServiceImpl implements SeatDetailService {
     @Autowired
     private SeatDetailRepository seatDetailRepository;
+
     @Override
     public List<SeatDetail> getAllSeatDetailByIdFilm(Long id) {
         return seatDetailRepository.getAllSeatDetailByIdFilm(id);
@@ -31,6 +32,6 @@ public class SeatDetailServiceImpl implements SeatDetailService {
 
     @Override
     public List<SeatDetail> getAllSeatDetailByIdToChoose(Date date_show, long film_id, long room_id, long time_id) {
-        return seatDetailRepository.getAllSeatDetailByIdToChoose(date_show,film_id,room_id,time_id);
+        return seatDetailRepository.getAllSeatDetailByIdToChoose(date_show, film_id, room_id, time_id);
     }
 }

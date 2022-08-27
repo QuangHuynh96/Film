@@ -28,5 +28,5 @@ public interface SeatDetailRepository extends JpaRepository<SeatDetail,Long> {
     // lấy ra danh sách ghế phù hợp với phim đã chọn để chọn ghế
     @Query(nativeQuery = true, value = "SELECT * FROM a0921i1_cinema.seat_detail where seat_detail.date_show=?1 and seat_detail.film_id=?2 and seat_detail.room_id=?3 and seat_detail.time_id=?4;")
     List<SeatDetail> getAllSeatDetailByIdToChoose(Date date_show, long film_id, long room_id,long time_id);
-}
 
+}

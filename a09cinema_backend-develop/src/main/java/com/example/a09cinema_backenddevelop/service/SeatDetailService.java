@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface SeatDetailService {
     List<SeatDetail> getAllSeatDetailByIdFilm(Long id);
+
     SeatDetailDto getIdSeatDetailByBookingCondition(String name, String date_show, long time_show_id);
+
     SeatDetail getInfoSeatDetailById(long id);
+
     List<SeatDetail> getAllSeatDetailByIdToChoose(Date date_show, long film_id, long room_id, long time_id);
 }
