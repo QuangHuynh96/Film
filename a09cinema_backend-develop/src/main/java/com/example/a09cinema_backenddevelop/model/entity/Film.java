@@ -1,5 +1,7 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,22 +24,37 @@ public class Film {
     private String duration;
     private String trailer;
     private String studioName;
+    private String content;
+    private String version;
+    private String img;
+    private boolean isDeletedFlag = false;
 
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<Category> categories;
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<FilmImg> filmImgs;
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    private List<SeatDetail> seatDetails;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    private List<CategoryFilm> categoryFilms;
+
+    public List<SeatDetail> getSeatDetails() {
+        return seatDetails;
+    }
+
+    public void setSeatDetails(List<SeatDetail> seatDetails) {
+        this.seatDetails = seatDetails;
+    }
+
+    public List<CategoryFilm> getCategoryFilms() {
+        return categoryFilms;
+    }
 
     public Film() {
     }
 
-    public Film(long id, String name, Date startDate, Date endDate, String actor, String director, String duration,
-                String trailer, String studioName, List<Category> categories, List<FilmImg> filmImgs,
-                List<Ticket> tickets) {
+    public Film(long id, String name, Date startDate, Date endDate, String actor, String director, String duration, String trailer, String studioName, List<FilmImg> filmImgs, List<SeatDetail> seatDetails, List<CategoryFilm> categoryFilms) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -47,9 +64,9 @@ public class Film {
         this.duration = duration;
         this.trailer = trailer;
         this.studioName = studioName;
-        this.categories = categories;
         this.filmImgs = filmImgs;
-        this.tickets = tickets;
+        this.seatDetails = seatDetails;
+        this.categoryFilms = categoryFilms;
     }
 
     public long getId() {
@@ -124,14 +141,6 @@ public class Film {
         this.studioName = studioName;
     }
 
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
     public List<FilmImg> getFilmImgs() {
         return filmImgs;
     }
@@ -140,11 +149,7 @@ public class Film {
         this.filmImgs = filmImgs;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+    public void setCategoryFilms(List<CategoryFilm> categoryFilms) {
+        this.categoryFilms = categoryFilms;
     }
 }
