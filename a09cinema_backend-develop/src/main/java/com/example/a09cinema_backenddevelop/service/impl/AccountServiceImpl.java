@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import  com.example.a09cinema_backenddevelop.service.AccountService;
 
 import java.util.List;
-import java.util.Optional;
-
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
