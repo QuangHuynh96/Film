@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import  com.example.a09cinema_backenddevelop.service.AccountService;
 
 import java.util.List;
-import java.util.Optional;
-
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -49,7 +47,9 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findById(id).orElse(null);
     }
 
-    @Modifying
+    /*
+        Nguyen Phuoc Dai Toan: update password
+    */
     @Override
     public void updatePassword(Long id, String newPassword) {
         accountRepository.updatePassword(id, newPassword);

@@ -26,12 +26,13 @@ public class HistoryController {
     */
     @GetMapping("/view-point-reward")
     public ResponseEntity<List<History>> findHistoriesPointReward(
+            @RequestParam Long accountId,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date start,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date end,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size) {
         List<History> histories = historyService.findHistoriesPointReward(getLocalDateTime(start), getLocalDateTime(end),
-                page * size, size);
+                page * size, size, accountId);
         return new ResponseEntity<>(histories, HttpStatus.OK);
     }
 
@@ -41,12 +42,13 @@ public class HistoryController {
     */
     @GetMapping("/view-point-exchange")
     public ResponseEntity<List<History>> findHistoriesPointExchange(
+            @RequestParam Long accountId,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date start,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date end,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size) {
         List<History> histories = historyService.findHistoriesPointExchange(getLocalDateTime(start), getLocalDateTime(end),
-                page * size, size);
+                page * size, size, accountId);
         return new ResponseEntity<>(histories, HttpStatus.OK);
     }
 
@@ -56,10 +58,11 @@ public class HistoryController {
     */
     @GetMapping("/total-page-reward")
     public ResponseEntity<Integer> findTotalPagePointReward(
+            @RequestParam Long accountId,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date start,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date end,
             @RequestParam(defaultValue = "5") int size) {
-        int totalPage = historyService.findTotalPointReward(getLocalDateTime(start), getLocalDateTime(end));
+        int totalPage = historyService.findTotalPointReward(getLocalDateTime(start), getLocalDateTime(end), accountId);
         if(totalPage % size == 0)       totalPage = totalPage / size;
         else totalPage = (int)Math.floor(totalPage * 1.0 / size) + 1;
         return new ResponseEntity<>(totalPage, HttpStatus.OK);
@@ -71,10 +74,11 @@ public class HistoryController {
     */
     @GetMapping("/total-page-exchange")
     public ResponseEntity<Integer> findTotalPagePointExchange(
+            @RequestParam Long accountId,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date start,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date end,
             @RequestParam(defaultValue = "5") int size) {
-        int totalPage = historyService.findTotalPointExchange(getLocalDateTime(start), getLocalDateTime(end));
+        int totalPage = historyService.findTotalPointExchange(getLocalDateTime(start), getLocalDateTime(end), accountId);
         if(totalPage % size == 0)       totalPage = totalPage / size;
         else totalPage = (int)Math.floor(totalPage * 1.0 / size) + 1;
         return new ResponseEntity<>(totalPage, HttpStatus.OK);

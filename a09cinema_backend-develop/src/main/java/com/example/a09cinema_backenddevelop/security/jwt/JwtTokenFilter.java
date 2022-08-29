@@ -1,10 +1,10 @@
 package com.example.a09cinema_backenddevelop.security.jwt;
 
+import com.example.a09cinema_backenddevelop.security.accountprincal.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -21,7 +21,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     JwtProvider jwtProvider;
 
     @Autowired
-    UserDetailsService userDetailsService;
+    UserDetailService userDetailsService;
 
     private String getJwtFromRequest(HttpServletRequest request){
         String token = request.getHeader("Authorization");
@@ -36,7 +36,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String token = getJwtFromRequest(request);
-            if(jwtProvider.validateToken(token)) System.out.println("Token hopwj keej");
+            if(jwtProvider.validateToken(token))
+                System.out.println("Token hopwj keej");
             else System.out.println("errror token");
             if(token!=null && jwtProvider.validateToken(token)){
                 String username = jwtProvider.getUserNameFromToken(token);

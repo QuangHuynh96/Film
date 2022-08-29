@@ -18,31 +18,31 @@ public class HistoryServiceImpl implements HistoryService {
          Nguyen Phuoc Dai Toan: find total elements of list point reward
      */
     @Override
-    public int findTotalPointReward(LocalDateTime start, LocalDateTime end) {
-        return bookingRepository.findTotalPointReward(start, end);
+    public int findTotalPointReward(LocalDateTime start, LocalDateTime end, Long accountId) {
+        return bookingRepository.findTotalPointReward(start, end, accountId);
     }
 
     /*
         Nguyen Phuoc Dai Toan: find total elements of list point exchange
     */
     @Override
-    public int findTotalPointExchange(LocalDateTime start, LocalDateTime end) {
-        return bookingRepository.findTotalPointExchange(start, end);
+    public int findTotalPointExchange(LocalDateTime start, LocalDateTime end, Long accountId) {
+        return bookingRepository.findTotalPointExchange(start, end, accountId);
     }
 
     /*
         Nguyen Phuoc Dai Toan: find list point reward by pagination
     */
     @Override
-    public List<History> findHistoriesPointReward(LocalDateTime start, LocalDateTime end, int offset, int numberRecord) {
-        return bookingRepository.findHistoriesPointReward(start, end, offset, numberRecord);
+    public List<History> findHistoriesPointReward(LocalDateTime start, LocalDateTime end, int offset, int numberRecord, Long accountId) {
+        return bookingRepository.findHistoriesPointReward(start, end, offset, numberRecord, accountId);
     }
 
     /*
         Nguyen Phuoc Dai Toan: find list point exchange by pagination
     */
     @Override
-    public List<History> findHistoriesPointExchange(LocalDateTime start, LocalDateTime end, int offset, int numberRecord) {
-        return bookingRepository.findHistoriesPointExchange(start, end, offset, numberRecord);
+    public List<History> findHistoriesPointExchange(LocalDateTime start, LocalDateTime end, int offset, int numberRecord, Long accountId) {
+        return bookingRepository.findHistoriesPointExchange(start, end, offset, numberRecord, accountId);
     }
 }
