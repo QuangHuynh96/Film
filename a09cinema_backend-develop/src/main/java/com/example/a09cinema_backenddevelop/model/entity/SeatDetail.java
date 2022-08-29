@@ -1,13 +1,15 @@
 package com.example.a09cinema_backenddevelop.model.entity;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+
+
 
 @Data
 @Entity
@@ -29,12 +31,11 @@ public class SeatDetail {
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
-    @JsonBackReference("seat_detail")
     @ManyToOne
     @JoinColumn(name = "seat_id", referencedColumnName = "id")
     private Seat seat;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Film film;

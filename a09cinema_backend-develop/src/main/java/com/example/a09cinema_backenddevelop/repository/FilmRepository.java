@@ -22,5 +22,4 @@ public interface FilmRepository extends JpaRepository<Film,Long> {
 
     @Query(value = "SELECT film.* FROM film inner join seat_detail on film.id = seat_detail.film_id where seat_detail.date_show between date(now()) and date(now())+ interval 4 day  ", nativeQuery = true)
     Page<Film> findSort(Pageable pageable);
-
 }

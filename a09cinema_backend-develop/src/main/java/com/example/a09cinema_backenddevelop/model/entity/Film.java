@@ -1,7 +1,8 @@
+
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
@@ -12,7 +13,8 @@ import java.util.List;
 
 @Data
 @Entity
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,19 +28,21 @@ public class Film {
     private String duration;
     private String trailer;
     private String studioName;
-    private boolean isDeletedFlag = false;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+//    @JsonBackReference
     private List<FilmImg> filmImgs;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<SeatDetail> seatDetails;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+//    @JsonBackReference
     private List<CategoryFilm> categoryFilms;
 
 
+
 }
+
