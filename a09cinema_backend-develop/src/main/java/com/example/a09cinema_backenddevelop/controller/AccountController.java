@@ -50,6 +50,7 @@ public class AccountController {
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
+
     @PutMapping("/edit/{id}")
     public ResponseEntity<Account> editAccount(@PathVariable Long id,
                                                @Valid
@@ -61,7 +62,12 @@ public class AccountController {
         account.setId(id);
         return new ResponseEntity<>(accountService.save(account), HttpStatus.OK);
     }
-    
+
+    @GetMapping("/checkExistEmail")
+    public boolean checkExistEmail(@RequestParam String email) {
+        return accountService.existsByEmail(email);
+    }
+
     @PostMapping("/updatePassword")
     public ResponseEntity<Account> updatePassword(@RequestParam Long id,
                                                   @RequestParam String oldPass,
@@ -70,7 +76,7 @@ public class AccountController {
 
         if(account == null) {
             System.out.println("account không tồn tại");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         // If old password = password in database
         if(passwordEncoder.matches(oldPass, account.getPassword())) {
@@ -80,7 +86,7 @@ public class AccountController {
         }
         else {
             System.out.println("password không hợp lệ");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -92,7 +98,7 @@ public class AccountController {
         }
         accountRequest.setId(id);
         accountService.updateInfo(accountRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(accountRequest, HttpStatus.OK);
     }
 
 //    @PostMapping("/auth/add")

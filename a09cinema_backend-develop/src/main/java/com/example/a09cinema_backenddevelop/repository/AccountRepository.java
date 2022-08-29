@@ -8,11 +8,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account,Long> {
@@ -24,6 +22,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
             nativeQuery = true)
     Page<Account> findAll(@Param("username") String username, Pageable pageable);
 
+
 //    findByNameContaining
 //    Page<Account> findByUsernameContaining (String username, Pageable pageable);
 
@@ -34,6 +33,13 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
 //    @Query(value= "update Account set fullname = :fullname, password = :password, birthday = :birthday, gender = :gender, email = :email, phone = :phone, address = :address where id = :id",
 //            nativeQuery = true)
 //    void editMember(Long id, String fullname, String password, LocalDate birthday, String gender, String email, String phone, String address);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Account SET fullname = :fullName, birthday = :date, gender = :gender, " +
+            "email = :email, id_card = :idCard, phone = :phone, address = :address" +
+            " WHERE id = :id", nativeQuery = true)
+    void updateInfo(Long id, String fullName, LocalDate date, String gender, String email, String idCard, String phone, String address);
 
     Account findByUsername(String username);
     Boolean existsByUsername(String username);
@@ -56,12 +62,5 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Transactional
     @Query(value = "UPDATE Account SET password = :newPassword WHERE id = :id", nativeQuery = true)
     void updatePassword(Long id, String newPassword);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE Account SET fullname = :fullName, birthday = :date, gender = :gender, " +
-            "email = :email, id_card = :idCard, phone = :phone, address = :address " +
-            " WHERE id = :id", nativeQuery = true)
-    void updateInfo(Long id, String fullName, LocalDate date, String gender, String email, String idCard, String phone, String address);
 
 }

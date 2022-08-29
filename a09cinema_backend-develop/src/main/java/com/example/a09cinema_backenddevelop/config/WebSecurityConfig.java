@@ -1,5 +1,6 @@
 package com.example.a09cinema_backenddevelop.config;
 
+import com.example.a09cinema_backenddevelop.security.accountprincal.UserDetailService;
 import com.example.a09cinema_backenddevelop.security.jwt.JwtEntryPoint;
 import com.example.a09cinema_backenddevelop.security.jwt.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -23,7 +23,7 @@ import javax.servlet.Filter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserDetailsService userDetailsService;
+    UserDetailService userDetailsService;
 
     @Autowired
     JwtEntryPoint jwtEntryPoint;
@@ -56,7 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 // all other requests need to be authenticated
                 .anyRequest().authenticated().and()
-
                 // make sure we use stateless session; session won't be used to store user's state.
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
