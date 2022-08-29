@@ -93,6 +93,7 @@ public class AccountController {
 
     @PostMapping("/update")
     public ResponseEntity<Account> save(@RequestParam Long id, @Valid @RequestBody Account accountRequest) {
+        System.out.println("Hello");
         if (accountService.findById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

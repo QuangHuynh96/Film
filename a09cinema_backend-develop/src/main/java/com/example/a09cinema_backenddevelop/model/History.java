@@ -6,7 +6,7 @@ public interface History {
     Long getId();
     @Value("#{target.name}")
     String getFilmName();
-    @Value("#{target.day_time_boooking}")
+    @Value("#{target.day_time_booking}")
     String getDate();
     @Value("#{target.point_reward}")
     String getPointReward();
