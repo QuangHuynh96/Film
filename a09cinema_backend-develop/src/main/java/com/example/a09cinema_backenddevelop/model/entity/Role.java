@@ -1,6 +1,7 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
@@ -61,7 +62,7 @@ public class Role {
     private long id;
 
     private String name;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<AccountRole> accountRoles;
 

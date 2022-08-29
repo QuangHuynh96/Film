@@ -2,6 +2,7 @@ package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -22,7 +23,7 @@ public class Seat {
     private boolean vip;
     private String name;
     private double price;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetail;
 

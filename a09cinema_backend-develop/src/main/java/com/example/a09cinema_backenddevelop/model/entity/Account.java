@@ -1,5 +1,12 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
+
+//import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.core.JsonGenerator;
+
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
 import javax.persistence.*;
@@ -46,10 +53,11 @@ public class Account {
     private String provider;
 
 
-
+    @JsonManagedReference("account_roles")
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<AccountRole> accountRoles;
 
+    @JsonManagedReference("booking")
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 

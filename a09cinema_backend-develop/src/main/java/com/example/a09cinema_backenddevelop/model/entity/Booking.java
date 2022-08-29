@@ -1,5 +1,13 @@
 package com.example.a09cinema_backenddevelop.model.entity;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+//import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,15 +31,14 @@ public class Booking {
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 
-//    @OneToOne(mappedBy = "booking")
-//    private History history;
-@OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-private List<SeatDetail> seatDetails;
+    @JsonManagedReference("seat_details")
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+    private List<SeatDetail> seatDetails;
 
     public Booking() {
     }
@@ -103,6 +110,7 @@ private List<SeatDetail> seatDetails;
     public List<SeatDetail> getSeatDetails() {
         return seatDetails;
     }
+
 
     public void setSeatDetails(List<SeatDetail> seatDetails) {
         this.seatDetails = seatDetails;

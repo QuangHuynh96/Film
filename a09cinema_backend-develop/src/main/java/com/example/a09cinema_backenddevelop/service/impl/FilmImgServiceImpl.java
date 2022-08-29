@@ -4,5 +4,5 @@ import com.example.a09cinema_backenddevelop.service.FilmService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FilmImgServiceImpl implements FilmService {
+public class FilmImgServiceImpl  {
 }
