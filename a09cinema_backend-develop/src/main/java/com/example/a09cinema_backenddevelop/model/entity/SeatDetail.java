@@ -1,9 +1,7 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,9 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-
 @JsonIdentityInfo(generator= JSOGGenerator.class)
-
 public class SeatDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +26,6 @@ public class SeatDetail {
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
-
 
     @ManyToOne
     @JoinColumn(name = "seat_id", referencedColumnName = "id")
@@ -118,6 +113,4 @@ public class SeatDetail {
     public void setFilm(Film film) {
         this.film = film;
     }
-
-
 }

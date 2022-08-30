@@ -13,7 +13,6 @@ import java.util.Set;
 @Entity
 @Data
 @JsonIdentityInfo(generator= JSOGGenerator.class)
-
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

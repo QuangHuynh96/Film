@@ -1,38 +1,57 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
+import com.example.a09cinema_backenddevelop.validation.DateFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.boot.jackson.JsonObjectSerializer;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
+
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+
 @Entity
 @Data
-@JsonIdentityInfo(generator= JSOGGenerator.class)
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Boolean isEnabled;
+    @NotBlank
     private String username;
     private String accountCode;
+    @NotEmpty
     private String password;
+    @NotEmpty
+    @Length(max = 100)
     private String fullname;
+    @DateFormat
     private LocalDate birthday;
+    @NotEmpty
+    @Pattern(message = "Vui lòng nhập số",regexp = "^\\d{9,12}$")
     private String idCard;
     private String address;
+    @NotEmpty
+    @Pattern(message = "Số điện thoại có 10 số", regexp = "((09|03|07|08|05)([0-9]{8})\\b)")
     private String phone;
     private String verificationCode;
+    @NotEmpty
+    @Email
     private String email;
     private String gender;
     private int totalPoint;
@@ -42,7 +61,18 @@ public class Account {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean deleted;
 
+    public Account(String name, String username, String email, String encode) {
+    }
+
+    public Account() {
+
+    }
+
+
     public boolean isEnable() {
+        return enable;
+    }
+    public boolean getIsEnabled() {
         return enable;
     }
 
@@ -58,11 +88,12 @@ public class Account {
 
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @JsonManagedReference("account-role")
     private List<AccountRole> accountRoles;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @JsonManagedReference("account-booking")
     private List<Booking> bookings;
-
 
     public String getVerificationCode() {
         return verificationCode;
@@ -82,11 +113,8 @@ public class Account {
 
     @ManyToMany
     @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonIgnore
     private Set<Role> roles;
-
-    public Account() {
-    }
-
     public Account(long id, Boolean isEnabled, String username, String accountCode, String password, String fullname, LocalDate birthday, String idCard, String address, String phone, String verificationCode, String email, String gender, int totalPoint, String imageUrl, boolean deleted, boolean enable, String provider, List<AccountRole> accountRoles, List<Booking> bookings, Set<Role> roles) {
         this.id = id;
         this.isEnabled = isEnabled;
@@ -110,11 +138,9 @@ public class Account {
         this.bookings = bookings;
         this.roles = roles;
     }
-
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -245,10 +271,6 @@ public class Account {
 
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
     }
 
     public void setRoles(Set<Role> roles) {

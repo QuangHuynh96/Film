@@ -2,7 +2,6 @@ package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,9 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-
 @JsonIdentityInfo(generator= JSOGGenerator.class)
-
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +35,6 @@ public class Film {
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetails;
-
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<CategoryFilm> categoryFilms;
 
