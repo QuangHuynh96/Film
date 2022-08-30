@@ -5,11 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-//<<<<<<< HEAD
-////import com.voodoodyne.jackson.jsog.JSOGGenerator;
-//=======
-////import com.voodoodyne.jackson.jsog.JSOGGenerator;
-//>>>>>>> ticket-PhuongNTB
+
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.boot.jackson.JsonObjectSerializer;
@@ -21,7 +18,7 @@ import java.util.Set;
 
 @Entity
 @Data
-//@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

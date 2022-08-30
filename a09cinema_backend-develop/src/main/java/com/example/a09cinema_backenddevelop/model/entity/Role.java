@@ -1,6 +1,7 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
@@ -8,6 +9,8 @@ import javax.persistence.*;
 import java.util.List;
 @Entity
 @Data
+@JsonIdentityInfo(generator= JSOGGenerator.class)
+
 public class Role {
 //AnhLT
     public static final String ROLE_USER = "ROLE_USER";

@@ -3,6 +3,7 @@ package com.example.a09cinema_backenddevelop.model.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Data
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +36,6 @@ public class Booking {
     private Account account;
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetails;
-
-//    @OneToOne(mappedBy = "booking")
-//    private History history;
 
 
     public List<SeatDetail> getSeatDetails() {
@@ -109,7 +108,6 @@ public class Booking {
     public Account getAccount() {
         return account;
     }
-
     public void setAccount(Account account) {
         this.account = account;
     }
