@@ -31,4 +31,11 @@ public interface AccountService {
     void addVerificationCode(String username) throws MessagingException, UnsupportedEncodingException;
     Boolean findAccountByVerificationCodeToResetPassword(String code);
     void saveNewPassword(String password,String code);
+
+
+//  Hiển thị, tìm kiếm và xoá Nhân viên
+    Page<Account> listEmployee(Pageable pageable);
+    Page<Account> searchEmployee(Pageable pageable, String s);
+    void deleteEmployeeAccountById(Long id);
+
 }

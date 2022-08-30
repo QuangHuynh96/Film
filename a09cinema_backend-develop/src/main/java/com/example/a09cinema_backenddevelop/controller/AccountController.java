@@ -122,5 +122,18 @@ public class AccountController {
 //        Account newAccount = accountService.saveAccount(account);
 //        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
 //    }
+//   Hiển thị, tìm kiếm và xoá nhân viên
+    @GetMapping(value = "employee/list")
+    public Page<Account> getAllEmployee(@PageableDefault(5)Pageable pageable, @RequestParam("search") Optional<String> search) {
+        if (search.isPresent()) {
+            return accountService.searchEmployee(pageable, search.get());
+        }
+        return accountService.listEmployee(pageable);
+    }
+    @DeleteMapping(value = "employee/delete/{id}")
+    public ResponseEntity<Account> deleteByEmployeeId(@PathVariable Long id) {
+        accountService.deleteEmployeeAccountById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
 

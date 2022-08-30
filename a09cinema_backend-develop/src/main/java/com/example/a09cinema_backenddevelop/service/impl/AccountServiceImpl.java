@@ -124,4 +124,19 @@ public class AccountServiceImpl implements AccountService {
     public Account saveAccount(Account account) {
         return accountRepository.save(account);
     }
+
+
+//    Hiển thị, tìm kiếm và xoá Nhân Viên
+    @Override
+    public Page<Account> searchEmployee(Pageable pageable, String s) {
+        return accountRepository.getSearchAllEmployee(pageable,s);
+    }
+    @Override
+    public Page<Account> listEmployee(Pageable pageable) {
+        return accountRepository.getAllEmployee(pageable);
+    }
+    @Override
+    public void deleteEmployeeAccountById(Long id) {
+        accountRepository.deleteEmployeeAccountById(id);
+    }
 }
