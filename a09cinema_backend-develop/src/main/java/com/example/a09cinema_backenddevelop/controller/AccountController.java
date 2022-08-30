@@ -3,42 +3,28 @@ package com.example.a09cinema_backenddevelop.controller;
 import com.example.a09cinema_backenddevelop.model.entity.Account;
 import com.example.a09cinema_backenddevelop.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import javax.validation.Valid;
-
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/account")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
-
-    @GetMapping(value = "employee/list")
-    public Page<Account> getAllEmployee(@PageableDefault(5)Pageable pageable, @RequestParam("search") Optional<String> search) {
-        if (search.isPresent()) {
-            return accountService.searchEmployee(pageable, search.get());
-        }
-        return accountService.listEmployee(pageable);
-    }
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -60,16 +46,8 @@ public class AccountController {
         Account account = accountService.findById(id);
         if (account == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
         }
-        return new ResponseEntity<>(account,HttpStatus.OK);
-
-    }
-
-    @DeleteMapping(value = "employee/delete/{id}")
-    public ResponseEntity<Account> deleteByEmployeeId(@PathVariable Long id) {
-        accountService.deleteEmployeeAccountById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
 
@@ -84,7 +62,12 @@ public class AccountController {
         account.setId(id);
         return new ResponseEntity<>(accountService.save(account), HttpStatus.OK);
     }
-    
+
+    @GetMapping("/checkExistEmail")
+    public boolean checkExistEmail(@RequestParam String email) {
+        return accountService.existsByEmail(email);
+    }
+
     @PostMapping("/updatePassword")
     public ResponseEntity<Account> updatePassword(@RequestParam Long id,
                                                   @RequestParam String oldPass,
@@ -93,7 +76,7 @@ public class AccountController {
 
         if(account == null) {
             System.out.println("account không tồn tại");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         // If old password = password in database
         if(passwordEncoder.matches(oldPass, account.getPassword())) {
@@ -103,19 +86,20 @@ public class AccountController {
         }
         else {
             System.out.println("password không hợp lệ");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/update")
     public ResponseEntity<Account> save(@RequestParam Long id, @Valid @RequestBody Account accountRequest) {
+        System.out.println("Hello");
         if (accountService.findById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         accountRequest.setId(id);
         accountService.updateInfo(accountRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(accountRequest, HttpStatus.OK);
     }
 
 //    @PostMapping("/auth/add")
@@ -138,5 +122,18 @@ public class AccountController {
 //        Account newAccount = accountService.saveAccount(account);
 //        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
 //    }
+//   Hiển thị, tìm kiếm và xoá nhân viên
+    @GetMapping(value = "employee/list")
+    public Page<Account> getAllEmployee(@PageableDefault(5)Pageable pageable, @RequestParam("search") Optional<String> search) {
+        if (search.isPresent()) {
+            return accountService.searchEmployee(pageable, search.get());
+        }
+        return accountService.listEmployee(pageable);
+    }
+    @DeleteMapping(value = "employee/delete/{id}")
+    public ResponseEntity<Account> deleteByEmployeeId(@PathVariable Long id) {
+        accountService.deleteEmployeeAccountById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
 

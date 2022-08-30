@@ -6,18 +6,13 @@ import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import  com.example.a09cinema_backenddevelop.service.AccountService;
-
-
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-
+import org.springframework.stereotype.Service;
+import  com.example.a09cinema_backenddevelop.service.AccountService;
 
 import java.util.List;
-
-
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -25,21 +20,13 @@ import java.io.UnsupportedEncodingException;
 
 @Service
 public class AccountServiceImpl implements AccountService {
-    @Autowired private AccountRepository accountRepository;
-
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Autowired
     JavaMailSender javaMailSender;
 
     @Override
-    public Page<Account> searchEmployee(Pageable pageable, String s) {
-        return accountRepository.getSearchAllEmployee(pageable,s);
-    }
-
-    @Override
-    public Page<Account> listEmployee(Pageable pageable) {
-        return accountRepository.getAllEmployee(pageable);
-    }
     public Page<Account> getAllAccount(String username,
                                        Pageable pageable) {
         return accountRepository.findAll(username, pageable);
@@ -60,7 +47,9 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findById(id).orElse(null);
     }
 
-    @Modifying
+    /*
+        Nguyen Phuoc Dai Toan: update password
+    */
     @Override
     public void updatePassword(Long id, String newPassword) {
         accountRepository.updatePassword(id, newPassword);
@@ -132,14 +121,22 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void deleteEmployeeAccountById(Long id) {
-        accountRepository.deleteEmployeeAccountById(id);
+    public Account saveAccount(Account account) {
+        return accountRepository.save(account);
     }
 
 
-
+//    Hiển thị, tìm kiếm và xoá Nhân Viên
     @Override
-    public Account saveAccount(Account account) {
-        return accountRepository.save(account);
+    public Page<Account> searchEmployee(Pageable pageable, String s) {
+        return accountRepository.getSearchAllEmployee(pageable,s);
+    }
+    @Override
+    public Page<Account> listEmployee(Pageable pageable) {
+        return accountRepository.getAllEmployee(pageable);
+    }
+    @Override
+    public void deleteEmployeeAccountById(Long id) {
+        accountRepository.deleteEmployeeAccountById(id);
     }
 }

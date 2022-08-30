@@ -40,15 +40,10 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
-    // https://mvnrepository.com/artifact/com.voodoodyne.jackson.jsog/jackson-jsog
-    implementation group: 'com.voodoodyne.jackson.jsog', name: 'jackson-jsog', version: '1.1.2'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-//    testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.springframework.security:spring-security-test'
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-
+    
 }
 
 

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -35,7 +33,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    @JsonBackReference("acc_bookings")
+    @JsonBackReference("account-booking")
     private Account account;
 
 //    @OneToOne(mappedBy = "booking")

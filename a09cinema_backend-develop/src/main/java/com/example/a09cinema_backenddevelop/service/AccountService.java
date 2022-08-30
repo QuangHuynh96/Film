@@ -5,18 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 
 public interface AccountService {
-    Page<Account> listEmployee(Pageable pageable);
-    Page<Account> searchEmployee(Pageable pageable, String s);
-    void deleteEmployeeAccountById(Long id);
-
-
-
     Page<Account> getAllAccount(String username,
                                 Pageable pageable);
 
@@ -37,4 +31,11 @@ public interface AccountService {
     void addVerificationCode(String username) throws MessagingException, UnsupportedEncodingException;
     Boolean findAccountByVerificationCodeToResetPassword(String code);
     void saveNewPassword(String password,String code);
+
+
+//  Hiển thị, tìm kiếm và xoá Nhân viên
+    Page<Account> listEmployee(Pageable pageable);
+    Page<Account> searchEmployee(Pageable pageable, String s);
+    void deleteEmployeeAccountById(Long id);
+
 }

@@ -1,20 +1,13 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import com.example.a09cinema_backenddevelop.validation.DateFormat;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
+//import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
-import lombok.Data;
-
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 
@@ -27,10 +20,7 @@ import java.util.Set;
 
 
 @Entity
-
-@Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +55,14 @@ public class Account {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean deleted;
 
+    public Account(String name, String username, String email, String encode) {
+    }
+
+    public Account() {
+
+    }
+
+
     public boolean isEnable() {
         return enable;
     }
@@ -84,13 +82,12 @@ public class Account {
 
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    @JsonManagedReference("acc_roles")
+    @JsonManagedReference("account-role")
     private List<AccountRole> accountRoles;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    @JsonManagedReference("acc_bookings")
+    @JsonManagedReference("account-booking")
     private List<Booking> bookings;
-
 
     public String getVerificationCode() {
         return verificationCode;
@@ -108,13 +105,10 @@ public class Account {
         isEnabled = enabled;
     }
 
-
     @ManyToMany
-    @JsonBackReference
     @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     @JsonIgnore
     private Set<Role> roles;
-
 
     public long getId() {
         return id;
@@ -259,7 +253,6 @@ public class Account {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
 }
 
 
