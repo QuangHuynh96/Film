@@ -41,4 +41,5 @@ public class AccountServiceImpl implements AccountService {
 //    public void editMember(Account account) {
 //        accountRepository.editMember(account.getId(), account.getFullname(), account.getPassword(), account.getBirthday(), account.getGender(), account.getEmail(), account.getPhone(), account.getAddress());
 //    }
+
 }

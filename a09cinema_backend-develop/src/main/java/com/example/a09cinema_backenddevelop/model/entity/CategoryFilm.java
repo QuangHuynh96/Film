@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 @Entity
 //@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class CategoryFilm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

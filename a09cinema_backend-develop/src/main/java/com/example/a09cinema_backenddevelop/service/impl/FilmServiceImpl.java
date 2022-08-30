@@ -26,8 +26,18 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Page<Film> findSort(Pageable pageable) { return filmRepository.findSort(pageable);}
+    public Page<Film> findSort(Pageable pageable) {
+        return filmRepository.findSort(pageable);
+    }
+
     public Film findFilmById(long id) {
-        return filmRepository.findById(id).orElse(null);
+        return filmRepository.findById(id).orElse(null);}
+    public List<Film> findAllListFilm () {
+            return filmRepository.getAllFilm();
+        }
+
+    @Override
+    public Film findFilmByID(Long id) {
+        return filmRepository.findFilmById(id);
     }
 }

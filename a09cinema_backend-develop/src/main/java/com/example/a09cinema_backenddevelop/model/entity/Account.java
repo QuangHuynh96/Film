@@ -1,14 +1,17 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
-//import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.Type;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import lombok.Data;
+import org.hibernate.annotations.Type;
+import org.springframework.boot.jackson.JsonObjectSerializer;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -59,8 +62,8 @@ public class Account {
 //    @JsonManagedReference("account-role")
     private List<AccountRole> accountRoles;
 
+
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-//    @JsonManagedReference("account-booking")
     private List<Booking> bookings;
 
 
@@ -79,7 +82,6 @@ public class Account {
     public void setEnabled(Boolean enabled) {
         isEnabled = enabled;
     }
-
 //    @ManyToMany
 //    @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 //    @JsonIgnore
@@ -231,6 +233,9 @@ public class Account {
 //    public void setRoles(Set<Role> roles) {
 //        this.roles = roles;
 //    }
+    @ManyToMany
+    @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 }
 
 

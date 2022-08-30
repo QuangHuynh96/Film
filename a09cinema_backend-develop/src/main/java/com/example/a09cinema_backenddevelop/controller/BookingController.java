@@ -1,14 +1,16 @@
 package com.example.a09cinema_backenddevelop.controller;
 
 import com.example.a09cinema_backenddevelop.model.entity.Booking;
+
 import com.example.a09cinema_backenddevelop.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/booking")
+@CrossOrigin("*")
 public class BookingController {
     @Autowired
     private BookingService bookingService;
@@ -19,4 +21,11 @@ public class BookingController {
         return booking;
     }
 
+    @PostMapping(value = "/add-booking")
+    public ResponseEntity<Booking> addBooking(@RequestBody Booking[] bookings) {
+        for (Booking booking : bookings) {
+            bookingService.save(booking);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

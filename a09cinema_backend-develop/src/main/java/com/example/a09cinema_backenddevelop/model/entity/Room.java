@@ -11,11 +11,10 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
 
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Data
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +27,5 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<SeatDetail> seatDetail;
-}
 
+}

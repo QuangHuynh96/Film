@@ -1,5 +1,4 @@
 package com.example.a09cinema_backenddevelop.model.entity;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 //import com.voodoodyne.jackson.jsog.JSOGGenerator;
@@ -16,8 +15,7 @@ import java.util.List;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +35,6 @@ public class Booking {
     @JoinColumn(name = "account_id", referencedColumnName = "id")
 //    @JsonBackReference("account-booking")
     private Account account;
-    @JsonManagedReference
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetails;
 

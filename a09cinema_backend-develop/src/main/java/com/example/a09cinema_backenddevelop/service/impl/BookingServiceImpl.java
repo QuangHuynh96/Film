@@ -10,8 +10,13 @@ import org.springframework.stereotype.Service;
 public class BookingServiceImpl implements BookingService {
     @Autowired
     private BookingRepository bookingRepository;
+
     @Override
     public Booking findById(long id) {
         return bookingRepository.findById(id).orElse(null);
     }
+    @Override
+        public void save (Booking booking){
+            bookingRepository.save(booking);
+        }
 }
