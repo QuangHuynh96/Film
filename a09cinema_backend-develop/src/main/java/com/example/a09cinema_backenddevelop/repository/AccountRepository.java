@@ -63,7 +63,6 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Query(value = "UPDATE Account SET password = :newPassword WHERE id = :id", nativeQuery = true)
     void updatePassword(Long id, String newPassword);
 
-
     // (Hiển thị, tìm kiếm và xoá Nhân Viên
     @Query(
             value = "select * from account inner join account_role on account.id= account_role.account_id WHERE account.deleted=0 and account_role.role_id=2",
@@ -89,5 +88,4 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Query(value = "update `account` set account.deleted = true where account.id=?1", nativeQuery = true)
     void deleteEmployeeAccountById(Long id);
     // Hiển thị, tìm kiếm và xoá Nhân Viên)
-
 }
