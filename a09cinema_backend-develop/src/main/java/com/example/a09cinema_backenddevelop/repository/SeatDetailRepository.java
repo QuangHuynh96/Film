@@ -1,11 +1,13 @@
 package com.example.a09cinema_backenddevelop.repository;
-
+import com.example.a09cinema_backenddevelop.model.dto.SeatDetailDto;
+import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import com.example.a09cinema_backenddevelop.model.dto.SeatDetailDto;
 import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.Date;
 import java.util.List;
 

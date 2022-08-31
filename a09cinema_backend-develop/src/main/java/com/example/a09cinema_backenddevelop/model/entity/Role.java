@@ -1,5 +1,9 @@
 package com.example.a09cinema_backenddevelop.model.entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
@@ -10,7 +14,9 @@ import javax.persistence.*;
 import java.util.List;
 @Entity
 @Data
-@JsonIdentityInfo(generator= JSOGGenerator.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+
 public class Role {
     //AnhLT
     public static final String ROLE_USER = "ROLE_USER";
@@ -64,6 +70,7 @@ public class Role {
     private String name;
     @JsonManagedReference
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<AccountRole> accountRoles;
 
 

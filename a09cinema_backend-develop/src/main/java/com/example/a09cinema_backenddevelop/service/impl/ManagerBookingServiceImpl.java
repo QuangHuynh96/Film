@@ -10,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-
 @Service
 public class ManagerBookingServiceImpl implements ManagerBookingService {
     @Autowired
@@ -34,7 +32,6 @@ public class ManagerBookingServiceImpl implements ManagerBookingService {
 //            repository.takeTicket(booking.getId());
 //
 //    }
-
     @Override
     public Optional<Booking> getById(Long id) {
         return repository.findById(id);

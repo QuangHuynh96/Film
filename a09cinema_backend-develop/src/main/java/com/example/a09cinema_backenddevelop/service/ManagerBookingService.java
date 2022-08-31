@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface ManagerBookingService {
     Page<SelectAllBookingDto> findAll(String key, Pageable pageable);
-//    Booking findBookingById(Long id);
-//Booking findBookingByBookingCode(String code);
     Optional<Booking> getById(Long id);
     void save(Booking booking);
     Optional<SelectBookingDetail> selectBookingDetail(Long id);

@@ -1,8 +1,5 @@
 package com.example.a09cinema_backenddevelop.model.entity;
-
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import javax.persistence.*;
@@ -12,7 +9,6 @@ public class AccountRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @JsonBackReference("role")
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")

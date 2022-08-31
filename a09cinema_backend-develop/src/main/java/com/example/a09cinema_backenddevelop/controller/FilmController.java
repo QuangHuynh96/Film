@@ -1,37 +1,68 @@
 package com.example.a09cinema_backenddevelop.controller;
 
-import com.example.a09cinema_backenddevelop.model.dto.SeatDetailDto;
-import com.example.a09cinema_backenddevelop.model.dto.TimeDto;
 import com.example.a09cinema_backenddevelop.model.entity.Film;
 import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
 import com.example.a09cinema_backenddevelop.service.FilmService;
-import com.example.a09cinema_backenddevelop.service.SeatDetailService;
-import com.example.a09cinema_backenddevelop.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.List;
-
+import com.example.a09cinema_backenddevelop.model.dto.SeatDetailDto;
+import com.example.a09cinema_backenddevelop.model.dto.TimeDto;
+import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
+import com.example.a09cinema_backenddevelop.service.SeatDetailService;
+import com.example.a09cinema_backenddevelop.service.TimeService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import java.time.LocalDate;
 @RestController
-@RequestMapping(value = "api/film/")
+@RequestMapping("/api/film")
 @CrossOrigin("*")
 
 public class FilmController {
-    private LocalDate today = LocalDate.now();
-
-    @Qualifier("filmServiceImpl")
     @Autowired
     private FilmService filmService;
-
+    private LocalDate today = LocalDate.now();
     @Autowired
     private TimeService timeService;
 
     @Autowired
     private SeatDetailService seatDetailService;
+//    @Qualifier("filmServiceImpl")
+    @GetMapping("/info")
+    public Film getInfoFilm(@RequestParam("id") long id) {
+        Film filmInfo = this.filmService.findFilmById(id);
+        return filmInfo;
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<Film>> search(String value, Pageable pageable) {
+        Page<Film> films = filmService.search(value, pageable);
+        if (films.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(films, HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Page<Film>> findFilmWithPage(Pageable pageable) {
+        Page<Film> films = filmService.findAll(pageable);
+        if (films.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(films, HttpStatus.OK);
+    }
+
+    @GetMapping("/date")
+    public ResponseEntity<Page<Film>> findSortWithPage(Pageable pageable) {
+        Page<Film> films = filmService.findSort(pageable);
+        if (films.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(films, HttpStatus.OK);
+    }
 
     @GetMapping(value = "getAllFilm")
     public ResponseEntity<List<Film>> getAllGenre() {
@@ -54,7 +85,7 @@ public class FilmController {
 
     @GetMapping(value = "findFilmById/{id}")
     public ResponseEntity<Film> getFilmById(@PathVariable(value = "id") Long id) {
-        return ResponseEntity.ok(filmService.findFilmByID(id));
+        return ResponseEntity.ok(filmService.findFilmById(id));
     }
 
     @GetMapping(value = "getAllSeatDetailByIdSeat/{id}")

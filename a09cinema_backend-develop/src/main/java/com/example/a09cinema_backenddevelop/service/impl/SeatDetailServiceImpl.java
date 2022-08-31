@@ -6,7 +6,6 @@ import com.example.a09cinema_backenddevelop.repository.SeatDetailRepository;
 import com.example.a09cinema_backenddevelop.service.SeatDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +15,8 @@ public class SeatDetailServiceImpl implements SeatDetailService {
     private SeatDetailRepository seatDetailRepository;
 
     @Override
+    public SeatDetail findById(long id) {
+        return seatDetailRepository.findById(id).orElse(null);}
     public List<SeatDetail> getAllSeatDetailByIdFilm(Long id) {
         return seatDetailRepository.getAllSeatDetailByIdFilm(id);
     }

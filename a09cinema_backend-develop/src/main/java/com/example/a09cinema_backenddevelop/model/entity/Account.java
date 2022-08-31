@@ -1,21 +1,16 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
-
-//import com.voodoodyne.jackson.jsog.JSOGGenerator;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.core.JsonGenerator;
-
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-@JsonIdentityInfo(generator= JSOGGenerator.class)
 @Entity
-
+@Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,8 +50,8 @@ public class Account {
 
     @JsonManagedReference("account_roles")
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+//    @JsonManagedReference("account-role")
     private List<AccountRole> accountRoles;
-
     @JsonManagedReference("booking")
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Booking> bookings;
@@ -77,10 +72,10 @@ public class Account {
     public void setEnabled(Boolean enabled) {
         isEnabled = enabled;
     }
-
-    @ManyToMany
-    @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+//    @ManyToMany
+//    @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    @JsonIgnore
+//    private Set<Role> roles;
 
     public Account() {
     }
@@ -220,6 +215,9 @@ public class Account {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
+    @ManyToMany
+    @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public Set<Role> getRoles() {
         return roles;
