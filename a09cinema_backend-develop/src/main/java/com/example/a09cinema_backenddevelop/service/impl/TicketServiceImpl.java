@@ -13,8 +13,8 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     TicketRepository ticketRepository;
     @Override
-    public Page getBookedTicket(Pageable pageable) {
-        return ticketRepository.getBookedTicket(pageable);
+    public Page getBookedTicket(Pageable pageable, Long accountId) {
+        return ticketRepository.getBookedTicket(pageable,accountId);
     }
 
     @Override

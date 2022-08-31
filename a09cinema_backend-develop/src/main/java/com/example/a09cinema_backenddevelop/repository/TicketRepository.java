@@ -13,11 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface TicketRepository extends JpaRepository<SeatDetail, Long> {
 
-//    @Query(value = "select new com.example.a09cinema_backenddevelop.model.BookedTicket(sd.id, f.name, b.dayTimeBooking,b.totalPrice, b.received) from SeatDetail sd  " +
+    //    @Query(value = "select new com.example.a09cinema_backenddevelop.model.BookedTicket(sd.id, f.name, b.dayTimeBooking,b.totalPrice, b.received) from SeatDetail sd  " +
 //            "join sd.booking b  join sd.film f where b.isDeleted <> true ")
     @Query(value = "select new com.example.a09cinema_backenddevelop.model.BookedTicket(sd.id, f.name, b.dayTimeBooking,b.totalPrice, b.received) from SeatDetail sd  " +
-            "join sd.booking b  join sd.film f where b.isDeleted <> true")
-    Page<BookedTicket> getBookedTicket(Pageable pageable);
+            "join sd.booking b  join sd.film f where b.isDeleted <> true and b.account.id= :accountId")
+    Page<BookedTicket> getBookedTicket(Pageable pageable, Long accountId);
 
     @Modifying
     @Transactional

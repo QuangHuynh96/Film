@@ -20,8 +20,8 @@ public class TicketController {
     TicketService ticketService;
 
     @GetMapping("/getbookedticket")
-    public ResponseEntity<Page<BookedTicket>> getBookedTicket(@PageableDefault(5) Pageable pageable) {
-        Page<BookedTicket> list = ticketService.getBookedTicket(pageable);
+    public ResponseEntity<Page<BookedTicket>> getBookedTicket(@PageableDefault(5) Pageable pageable,  @RequestParam Long accountId) {
+        Page<BookedTicket> list = ticketService.getBookedTicket(pageable, accountId);
         if (list.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

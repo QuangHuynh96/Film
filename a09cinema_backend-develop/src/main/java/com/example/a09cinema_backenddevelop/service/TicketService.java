@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface TicketService {
-    Page<BookedTicket> getBookedTicket(Pageable pageable);
+    Page<BookedTicket> getBookedTicket(Pageable pageable, Long accountId);
 
     SeatDetail findById(Long id);
     void deleteTicket(Long id);
