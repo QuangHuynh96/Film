@@ -1,6 +1,6 @@
 package com.example.a09cinema_backenddevelop.service.impl;
 
-import com.example.a09cinema_backenddevelop.DTO.StatisticFilm;
+import com.example.a09cinema_backenddevelop.dto.StatisticFilm;
 import com.example.a09cinema_backenddevelop.repository.FilmStatsticRepository;
 import com.example.a09cinema_backenddevelop.service.FilmStatisticService;
 import org.springframework.beans.factory.annotation.Autowired;

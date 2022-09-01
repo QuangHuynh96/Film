@@ -1,6 +1,6 @@
 package com.example.a09cinema_backenddevelop.repository;
 
-import com.example.a09cinema_backenddevelop.DTO.StatisticFilm;
+import com.example.a09cinema_backenddevelop.dto.StatisticFilm;
 import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,7 +49,5 @@ public interface FilmStatsticRepository extends JpaRepository<SeatDetail, Long> 
             "on seat_detail.booking_id = booking.id " +
             "where booking.day_time_booking = CURDATE() ", nativeQuery = true)
     List<StatisticFilm> findAllStatisticFilm();
-
-
 
 }

@@ -1,6 +1,6 @@
 package com.example.a09cinema_backenddevelop.controller;
 
-import com.example.a09cinema_backenddevelop.DTO.StatisticFilm;
+import com.example.a09cinema_backenddevelop.dto.StatisticFilm;
 import com.example.a09cinema_backenddevelop.repository.FilmStatsticRepository;
 import com.example.a09cinema_backenddevelop.service.FilmStatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,7 @@ public class FilmStatisticController {
     public ResponseEntity<List<StatisticFilm>> filmStatistic() {
 
         List<StatisticFilm> statisticFilms = filmStatisticService.statisticalByCurrentDay();
+
         if (statisticFilms.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

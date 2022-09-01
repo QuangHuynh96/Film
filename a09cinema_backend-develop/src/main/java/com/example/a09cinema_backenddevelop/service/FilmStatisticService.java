@@ -1,6 +1,7 @@
 package com.example.a09cinema_backenddevelop.service;
 
-import com.example.a09cinema_backenddevelop.DTO.StatisticFilm;
+import com.example.a09cinema_backenddevelop.dto.StatisticFilm;
+import com.example.a09cinema_backenddevelop.dto.StatisticFilm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
