@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Time {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

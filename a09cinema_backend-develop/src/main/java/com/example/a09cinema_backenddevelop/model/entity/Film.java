@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
 
@@ -17,6 +16,7 @@ import java.util.List;
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +30,10 @@ public class Film {
     private String duration;
     private String trailer;
     private String studioName;
+    private String content;
+    private String version;
+    private String img;
+    private boolean isDeletedFlag = false;
 
     @JsonManagedReference("film_imgs")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
@@ -40,7 +44,25 @@ public class Film {
     @JsonManagedReference("category_films")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<CategoryFilm> categoryFilms;
+
+
     public Film() {
+    }
+
+
+    public Film(long id, String name, Date startDate, Date endDate, String actor, String director, String duration, String trailer, String studioName, List<FilmImg> filmImgs, List<SeatDetail> seatDetails, List<CategoryFilm> categoryFilms) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.actor = actor;
+        this.director = director;
+        this.duration = duration;
+        this.trailer = trailer;
+        this.studioName = studioName;
+        this.filmImgs = filmImgs;
+        this.seatDetails = seatDetails;
+        this.categoryFilms = categoryFilms;
     }
 
     public long getId() {
@@ -122,7 +144,6 @@ public class Film {
     public void setFilmImgs(List<FilmImg> filmImgs) {
         this.filmImgs = filmImgs;
     }
-
     public List<SeatDetail> getSeatDetails() {
         return seatDetails;
     }
@@ -134,7 +155,6 @@ public class Film {
     public List<CategoryFilm> getCategoryFilms() {
         return categoryFilms;
     }
-
     public void setCategoryFilms(List<CategoryFilm> categoryFilms) {
         this.categoryFilms = categoryFilms;
     }

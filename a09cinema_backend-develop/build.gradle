@@ -18,13 +18,12 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
 
-//    implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    implementation 'org.springframework.boot:spring-boot-starter-mail'
-//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
@@ -40,6 +39,8 @@ dependencies {
     implementation group: 'com.voodoodyne.jackson.jsog', name: 'jackson-jsog', version: '1.1'
 // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
+// https://mvnrepository.com/artifact/com.voodoodyne.jackson.jsog/jackson-jsog
+    implementation group: 'com.voodoodyne.jackson.jsog', name: 'jackson-jsog', version: '1.1'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -57,7 +58,10 @@ dependencies {
     implementation 'org.springframework.session:spring-session-core'
 
     testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 }
+
 
 tasks.named('test') {
     useJUnitPlatform()

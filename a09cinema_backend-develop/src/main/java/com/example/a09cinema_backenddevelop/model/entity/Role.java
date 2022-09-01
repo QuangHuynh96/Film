@@ -2,13 +2,9 @@ package com.example.a09cinema_backenddevelop.model.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
-//import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,9 +12,10 @@ import java.util.List;
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
-
+//
+//@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Role {
-    //AnhLT
+
     public static final String ROLE_USER = "ROLE_USER";
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_MODERATOR = "ROLE_MODERATOR";
@@ -72,7 +69,7 @@ public class Role {
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<AccountRole> accountRoles;
-
-
-
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
+    }
 }

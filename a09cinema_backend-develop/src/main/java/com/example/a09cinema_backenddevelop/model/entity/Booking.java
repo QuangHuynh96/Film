@@ -2,7 +2,6 @@ package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
@@ -26,18 +25,17 @@ public class Booking {
     private int pointExchange;
     private int pointReward;
     private String bookingCode;
+    private Boolean isDeleted;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-//    @JsonBackReference("account-booking")
     private Account account;
     @JsonManagedReference("seat_details")
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetails;
-
     public Booking() {
     }
 
@@ -113,4 +111,5 @@ public class Booking {
     public void setSeatDetails(List<SeatDetail> seatDetails) {
         this.seatDetails = seatDetails;
     }
+
 }

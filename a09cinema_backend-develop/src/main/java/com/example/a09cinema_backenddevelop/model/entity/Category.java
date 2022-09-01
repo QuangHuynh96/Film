@@ -2,16 +2,9 @@ package com.example.a09cinema_backenddevelop.model.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.List;
-//@JsonIdentityInfo(generator= JSOGGenerator.class)
 
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
@@ -25,9 +18,6 @@ public class Category {
     @JsonBackReference
     private List<CategoryFilm> categoryFilms;
 
-    public Category() {
-    }
-
     public long getId() {
         return id;
     }
@@ -35,7 +25,6 @@ public class Category {
     public void setId(long id) {
         this.id = id;
     }
-
     public String getNameCategory() {
         return nameCategory;
     }
@@ -44,6 +33,13 @@ public class Category {
         this.nameCategory = nameCategory;
     }
 
+    public Category() {
+    }
+
+    public Category(long id, String nameCategory, Film film) {
+        this.id = id;
+        this.nameCategory = nameCategory;
+    }
     public List<CategoryFilm> getCategoryFilms() {
         return categoryFilms;
     }

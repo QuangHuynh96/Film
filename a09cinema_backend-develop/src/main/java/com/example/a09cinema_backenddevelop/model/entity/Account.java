@@ -4,10 +4,30 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+
+import com.example.a09cinema_backenddevelop.validation.DateFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
+//import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import lombok.Data;
+import org.hibernate.annotations.Type;
+import org.springframework.boot.jackson.JsonObjectSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
+
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+
+
 @Entity
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -16,15 +36,26 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Boolean isEnabled;
+    @NotBlank
     private String username;
     private String accountCode;
+    @NotEmpty
     private String password;
+    @NotEmpty
+    @Length(max = 100)
     private String fullname;
+    @DateFormat
     private LocalDate birthday;
+    @NotEmpty
+    @Pattern(message = "Vui lòng nhập số",regexp = "^\\d{9,12}$")
     private String idCard;
     private String address;
+    @NotEmpty
+    @Pattern(message = "Số điện thoại có 10 số", regexp = "((09|03|07|08|05)([0-9]{8})\\b)")
     private String phone;
     private String verificationCode;
+    @NotEmpty
+    @Email
     private String email;
     private String gender;
     private int totalPoint;
@@ -35,6 +66,9 @@ public class Account {
     private boolean deleted;
 
     public boolean isEnable() {
+        return enable;
+    }
+    public boolean getIsEnabled() {
         return enable;
     }
 
@@ -80,10 +114,41 @@ public class Account {
     public Account() {
     }
 
+
+    @ManyToMany
+    @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public Account(long id, Boolean isEnabled, String username, String accountCode, String password, String fullname, LocalDate birthday, String idCard, String address, String phone, String verificationCode, String email, String gender, int totalPoint, String imageUrl, boolean deleted, boolean enable, String provider, List<AccountRole> accountRoles, List<Booking> bookings, Set<Role> roles) {
+        this.id = id;
+        this.isEnabled = isEnabled;
+        this.username = username;
+        this.accountCode = accountCode;
+        this.password = password;
+        this.fullname = fullname;
+        this.birthday = birthday;
+        this.idCard = idCard;
+        this.address = address;
+        this.phone = phone;
+        this.verificationCode = verificationCode;
+        this.email = email;
+        this.gender = gender;
+        this.totalPoint = totalPoint;
+        this.imageUrl = imageUrl;
+        this.deleted = deleted;
+        this.enable = enable;
+        this.provider = provider;
+        this.accountRoles = accountRoles;
+        this.bookings = bookings;
+        this.roles = roles;
+    }
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -214,13 +279,6 @@ public class Account {
 
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
-    }
-    @ManyToMany
-    @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
-
-    public Set<Role> getRoles() {
-        return roles;
     }
 
     public void setRoles(Set<Role> roles) {

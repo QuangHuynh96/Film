@@ -3,6 +3,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import javax.persistence.*;
+import lombok.Data;
+import javax.persistence.*;
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
 public class AccountRole {
@@ -34,15 +36,5 @@ public class AccountRole {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

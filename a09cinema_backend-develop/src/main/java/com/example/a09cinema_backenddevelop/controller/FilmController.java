@@ -1,21 +1,21 @@
 package com.example.a09cinema_backenddevelop.controller;
-
 import com.example.a09cinema_backenddevelop.model.entity.Film;
-import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
 import com.example.a09cinema_backenddevelop.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import com.example.a09cinema_backenddevelop.model.entity.Category;
+import com.example.a09cinema_backenddevelop.model.entity.CategoryFilm;
+import com.example.a09cinema_backenddevelop.service.*;
+import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import com.example.a09cinema_backenddevelop.model.dto.SeatDetailDto;
 import com.example.a09cinema_backenddevelop.model.dto.TimeDto;
-import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
 import com.example.a09cinema_backenddevelop.service.SeatDetailService;
 import com.example.a09cinema_backenddevelop.service.TimeService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import java.time.LocalDate;
 @RestController
 @RequestMapping("/api/film")
@@ -30,7 +30,7 @@ public class FilmController {
 
     @Autowired
     private SeatDetailService seatDetailService;
-//    @Qualifier("filmServiceImpl")
+    //    @Qualifier("filmServiceImpl")
     @GetMapping("/info")
     public Film getInfoFilm(@RequestParam("id") long id) {
         Film filmInfo = this.filmService.findFilmById(id);
@@ -76,8 +76,7 @@ public class FilmController {
 
     @GetMapping(value = "timeShowOfFilm/")
     public ResponseEntity<List<TimeDto>> getTimeShowOfFilmById(@RequestParam(value = "date_show") String date_show, @RequestParam(value = "film_id") String film_id) {
-//        System.out.println(date_show);
-//        System.out.println(film_id);
+
         List<TimeDto> timeDtos= timeService.findAllTimeShowBySeatDetail(date_show,film_id);
         System.out.println(timeDtos);
         return ResponseEntity.ok(timeService.findAllTimeShowBySeatDetail(date_show,film_id));

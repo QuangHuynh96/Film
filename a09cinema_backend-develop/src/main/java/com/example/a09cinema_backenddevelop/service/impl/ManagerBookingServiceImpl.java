@@ -20,18 +20,6 @@ public class ManagerBookingServiceImpl implements ManagerBookingService {
 
         return repository.findAll(key,pageable);
     }
-
-//    @Override
-//    public Optional<Booking findBookingById(Long id) {
-//        return repository.findBookingById(id);
-//    }
-
-
-//    @Override
-//    public void takeTicket(Booking booking) {
-//            repository.takeTicket(booking.getId());
-//
-//    }
     @Override
     public Optional<Booking> getById(Long id) {
         return repository.findById(id);

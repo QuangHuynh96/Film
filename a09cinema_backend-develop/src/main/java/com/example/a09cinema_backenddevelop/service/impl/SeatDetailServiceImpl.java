@@ -1,5 +1,4 @@
 package com.example.a09cinema_backenddevelop.service.impl;
-
 import com.example.a09cinema_backenddevelop.model.dto.SeatDetailDto;
 import com.example.a09cinema_backenddevelop.model.entity.SeatDetail;
 import com.example.a09cinema_backenddevelop.repository.SeatDetailRepository;
@@ -9,11 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+import java.util.List;
+
 @Service
 public class SeatDetailServiceImpl implements SeatDetailService {
     @Autowired
     private SeatDetailRepository seatDetailRepository;
-
     @Override
     public SeatDetail findById(long id) {
         return seatDetailRepository.findById(id).orElse(null);}

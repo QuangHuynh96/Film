@@ -1,8 +1,6 @@
 package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
@@ -29,6 +27,7 @@ public class SeatDetail {
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
+
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "seat_id", referencedColumnName = "id")
@@ -44,6 +43,14 @@ public class SeatDetail {
     private Booking booking;
 
     public SeatDetail() {
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 
     public long getId() {
