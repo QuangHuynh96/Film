@@ -15,19 +15,17 @@ import java.util.Optional;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    @Query(value = "select * from account left join account_role on account.id = account_role.account_id where account_role.role_id = 1",
-            nativeQuery = true)
-    Page<Account> findAll(Pageable pageable);
 
     @Query(value = "select * from account where id = :id", nativeQuery = true)
     Optional<Account> findAccountId(@Param("id") long id);
+
     @Query(value= "select * from a0921i1_cinema.account " +
             "left join a0921i1_cinema.account_role " +
             "on a0921i1_cinema.account.id = a0921i1_cinema.account_role.account_id " +
-            "where account_role.role_id = 1 and account.username like concat('%', :username , '%')",
-           countQuery = "select count(*) from a0921i1_cinema.account left join a0921i1_cinema.account_role on a0921i1_cinema.account.id = a0921i1_cinema.account_role.account_id where account_role.role_id = 1 and account.username like concat('%', :username , '%')",
+            "where account_role.role_id = 1 and account.fullid like concat('%', :fullname , '%')",
+           countQuery = "select count(*) from a0921i1_cinema.account left join a0921i1_cinema.account_role on a0921i1_cinema.account.id = a0921i1_cinema.account_role.account_id where account_role.role_id = 1 and account.fullname like concat('%', :fullname , '%')",
             nativeQuery = true)
-    Page<Account> findAll(@Param("username") String username, Pageable pageable);
+    Page<Account> findAll(@Param("fullname") String username, Pageable pageable);
 
     @Modifying
     @Transactional

@@ -38,10 +38,10 @@ public class Film {
     @JsonManagedReference("film_imgs")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<FilmImg> filmImgs;
-    @JsonManagedReference("seat_detail")
+    @JsonManagedReference("film_seatDetail")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetails;
-    @JsonManagedReference("category_films")
+    @JsonManagedReference("film_category")
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<CategoryFilm> categoryFilms;
 

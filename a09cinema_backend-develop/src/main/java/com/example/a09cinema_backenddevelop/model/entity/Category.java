@@ -13,7 +13,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nameCategory;
-    @JsonManagedReference
+    @JsonManagedReference("category_film")
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<CategoryFilm> categoryFilms;

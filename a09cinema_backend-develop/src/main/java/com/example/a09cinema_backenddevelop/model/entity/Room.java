@@ -2,6 +2,7 @@ package com.example.a09cinema_backenddevelop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class Room {
     private boolean status;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference("room_seatDetail")
     private List<SeatDetail> seatDetail;
 
     public Room() {

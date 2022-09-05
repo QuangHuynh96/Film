@@ -5,9 +5,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
-import java.util.List;
-import java.util.Optional;
-
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 
@@ -19,8 +16,8 @@ public interface AccountService {
 
     List<Account> findAll();
 
+    Optional<Account> findByIdOption(long id);
     Account findById(long id);
-
     void updatePassword(Long id, String newPassword);
     void updateInfo(Account account);
     Account findByUsername(String  username);
@@ -38,7 +35,7 @@ public interface AccountService {
     Page<Account> searchEmployee(Pageable pageable, String s);
     void deleteEmployeeAccountById(Long id);
 
-    Page<Account> getAllAccount(Pageable pageable);
+//    Page<Account> getAllAccount(Pageable pageable);
 
 
 }

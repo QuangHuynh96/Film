@@ -14,12 +14,12 @@ public class CategoryFilm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JsonBackReference
+    @JsonBackReference("film_category")
     @ManyToOne
     @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Film film;
 
-    @JsonBackReference
+    @JsonBackReference("category_film")
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;

@@ -16,6 +16,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -26,19 +27,20 @@ public class AccountServiceImpl implements AccountService {
     JavaMailSender javaMailSender;
 
     @Override
-    public Page<Account> getAllAccount(Pageable pageable) {
-        return accountRepository.findAll(pageable);
+    public Account save(Account account) {
+        return accountRepository.save(account);
     }
 
     @Override
-    public Account save(Account account) {
-        return accountRepository.save(account);
+    public Optional<Account> findByIdOption(long id) {
+        return accountRepository.findAccountId(id);
     }
 
     @Override
     public Account findById(long id) {
         return accountRepository.findById(id).orElse(null);
     }
+
     public Page<Account> getAllAccount(String username,
                                        Pageable pageable) {
         return accountRepository.findAll(username, pageable);

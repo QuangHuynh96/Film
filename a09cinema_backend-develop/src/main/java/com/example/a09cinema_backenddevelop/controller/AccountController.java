@@ -23,11 +23,10 @@ public class AccountController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/list")
-    public ResponseEntity<Page<Account>> getAllAccount(@RequestParam(defaultValue = "",name = "username") String key_username,
-                                                       @PageableDefault(size = 10)Pageable pageable){
+    public ResponseEntity<Page<Account>> getAllAccount(@RequestParam(defaultValue = "", name = "username") String key_username,
+                                                       @PageableDefault(size = 10) Pageable pageable) {
 
         Page<Account> accounts = accountService.getAllAccount(key_username, pageable);
-
         if (accounts.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -36,7 +35,7 @@ public class AccountController {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<Account> findAccountById(@PathVariable Long id) {
-        Optional<Account> accountOptional = Optional.ofNullable(accountService.findById(id));
+        Optional<Account> accountOptional = accountService.findByIdOption(id);
         if (!accountOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -48,14 +47,13 @@ public class AccountController {
     public ResponseEntity<Account> editAccount(@PathVariable Long id,
                                                @Valid
                                                @RequestBody Account account) {
-        Account account1 = accountService.findById(id);
-        if (account1 == null) {
+        Optional<Account> accountOptional = accountService.findByIdOption(id);
+        if (!accountOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        account.setId(id);
+        account.setId(accountOptional.get().getId());
         return new ResponseEntity<>(accountService.save(account), HttpStatus.OK);
     }
-
 
     @GetMapping("/checkExistEmail")
     public boolean checkExistEmail(@RequestParam String email) {
@@ -66,8 +64,8 @@ public class AccountController {
     public ResponseEntity<Account> updatePassword(@RequestParam Long id,
                                                   @RequestParam String oldPass,
                                                   @RequestParam String newPass) {
-        Account account = accountService.findById(id);
 
+        Account account = accountService.findById(id);
         if(account == null) {
             System.out.println("account không tồn tại");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

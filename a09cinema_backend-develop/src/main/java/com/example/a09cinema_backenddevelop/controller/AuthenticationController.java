@@ -3,7 +3,6 @@ package com.example.a09cinema_backenddevelop.controller;
 import com.example.a09cinema_backenddevelop.model.entity.Account;
 import com.example.a09cinema_backenddevelop.payload.request.ResetPassRequest;
 import com.example.a09cinema_backenddevelop.payload.request.SignInForm;
-import com.example.a09cinema_backenddevelop.payload.request.SignUpForm;
 import com.example.a09cinema_backenddevelop.payload.request.VerifyRequest;
 import com.example.a09cinema_backenddevelop.payload.response.JwtResponse;
 import com.example.a09cinema_backenddevelop.payload.response.ResponseMessage;
@@ -47,11 +46,12 @@ public class AuthenticationController {
                 new UsernamePasswordAuthenticationToken(signInForm.getUsername(), signInForm.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         String token = jwtProvider.createToken(authentication);
         AccountPrinciple accountPrinciple = (AccountPrinciple) authentication.getPrincipal();
+        Account account = accountService.findByUsername(signInForm.getUsername());
+
         return ResponseEntity.ok(
-                new JwtResponse(token, accountPrinciple.getUsername(), accountPrinciple.getId(), accountPrinciple.getAuthorities())
+                new JwtResponse(token, accountPrinciple.getUsername(), accountPrinciple.getId(), account, accountPrinciple.getAuthorities())
         );
     }
 
@@ -94,7 +94,6 @@ public class AuthenticationController {
         if (accountService.existsByEmail(account.getEmail())) {
             System.out.println("Email đã được đăng kí");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         if (accountService.existsByUsername(account.getUsername())){
             System.out.println("Username đã đăng kí");
@@ -105,5 +104,4 @@ public class AuthenticationController {
         Account newAccount = accountService.saveAccount(account);
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
-
 }

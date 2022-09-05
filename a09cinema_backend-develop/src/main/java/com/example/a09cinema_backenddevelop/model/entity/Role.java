@@ -65,9 +65,8 @@ public class Role {
     private long id;
 
     private String name;
-    @JsonManagedReference
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference("role_account")
     private List<AccountRole> accountRoles;
     public void setAccountRoles(List<AccountRole> accountRoles) {
         this.accountRoles = accountRoles;

@@ -23,7 +23,7 @@ public class Seat {
     private boolean vip;
     private String name;
     private double price;
-    @JsonManagedReference("seat_detail")
+    @JsonManagedReference("seat_seatDetail")
     @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetail;
 

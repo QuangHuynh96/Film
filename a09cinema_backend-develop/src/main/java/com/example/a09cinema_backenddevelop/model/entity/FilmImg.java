@@ -17,7 +17,7 @@ public class FilmImg {
 
     private String urlImg;
 
-    @JsonBackReference
+    @JsonBackReference("film_imgs")
     @ManyToOne
     @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Film film;

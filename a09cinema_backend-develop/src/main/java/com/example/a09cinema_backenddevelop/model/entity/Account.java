@@ -82,7 +82,7 @@ public class Account {
     private String provider;
 
 
-    @JsonManagedReference("account_roles")
+    @JsonManagedReference("account_role")
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
 //    @JsonManagedReference("account-role")
     private List<AccountRole> accountRoles;

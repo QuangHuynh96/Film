@@ -19,25 +19,25 @@ public class SeatDetail {
     private boolean isFlag;
     private Date dateShow;
     private boolean status;
-    @JsonBackReference
+    @JsonBackReference("time_seatDetail")
     @ManyToOne
     @JoinColumn(name = "time_id", referencedColumnName = "id")
     private Time time;
-    @JsonBackReference
+    @JsonBackReference("room_seatDetail")
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
-    @JsonBackReference
+    @JsonBackReference("seat_seatDetail")
     @ManyToOne
     @JoinColumn(name = "seat_id", referencedColumnName = "id")
     private Seat seat;
-    @JsonBackReference
+    @JsonBackReference("film_seatDetail")
     @ManyToOne
     @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Film film;
 
-    @JsonBackReference
+    @JsonBackReference("booking_seatDetail")
     @ManyToOne
     @JoinColumn(name = "booking_id", referencedColumnName = "id")
     private Booking booking;

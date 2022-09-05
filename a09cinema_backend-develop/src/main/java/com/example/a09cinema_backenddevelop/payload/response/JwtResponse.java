@@ -1,5 +1,6 @@
 package com.example.a09cinema_backenddevelop.payload.response;
 
+import com.example.a09cinema_backenddevelop.model.entity.Account;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
@@ -11,24 +12,28 @@ public class JwtResponse {
 
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        id = id;
-    }
+    private Account account;
 
     private Collection<?extends GrantedAuthority> roles;
 
     public JwtResponse() {
     }
 
-    public JwtResponse(String token, String name, long id, Collection<? extends GrantedAuthority> roles) {
+    public JwtResponse(String token, String name, long id,Account account, Collection<? extends GrantedAuthority> roles) {
         this.token = token;
         this.name = name;
         this.roles = roles;
         this.id = id;
+        this.account = account;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        id = id;
     }
 
     public String getToken() {

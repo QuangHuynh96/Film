@@ -29,11 +29,11 @@ public class Booking {
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;
-    @JsonBackReference
+    @JsonBackReference("booking")
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
-    @JsonManagedReference("seat_details")
+    @JsonManagedReference("booking_seatDetail")
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetails;
     public Booking() {

@@ -19,8 +19,7 @@ public class Time {
     private long id;
 
 
-    @JsonManagedReference
-    @JsonBackReference
+    @JsonManagedReference("time_seatDetail")
     @OneToMany(mappedBy = "time", cascade = CascadeType.ALL)
     private List<SeatDetail> seatDetail;
 
